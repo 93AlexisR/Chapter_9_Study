@@ -1,0 +1,11 @@
+what is std::ostringstream, is it better to use than string? When?
+
+example:
+std::string Time::toUniversalString(void) const {
+	std::ostringstream output; //whats ostringstream
+	output << std::setfill('0') << std::setw(2) << getHour() << ":"
+		<< std::setw(2) << getMinute() < , ":" << std::setw(2) << getSecond();
+	return output.str();
+}
+
+

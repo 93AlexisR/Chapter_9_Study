@@ -84,6 +84,31 @@ We can minimize the proliferation of identifier names by using the this-> pointe
 
 9.14.2 - Using the "this" POINTER TO ENABLE CASCADED FUNCTION CALLS
 
-Cascaded function calls: invoking multiple functions sequentially in the same statements. 
+Cascaded function calls: invoking multiple functions sequentially in the same statements
 
-This can be done like this: 
+this can be done like this example: 
+
+Time& Time::setTime(unsigned int hour, unsigned int minute, unsigned int second) {
+	if ((hour >= 0 && hour < 24) && (minute >= 0 && minute < 60) && (second >= 0 && second < 60)) {
+		this->setHour(hour).setMinute(minute).setSecond(second); // cascaded function calls
+	}
+	else {
+		throw std::invalid_argument(
+			"Hour, minute and/or second is out of range");
+	}
+	return *this;
+}
+
+if all functions return *this, which to do so need to return Time&
+_____________________
+
+9,15,1 mOTIVATING CLASSWIDE DATA
+
+We can create a class such that a data member is accessible by all class objects so that a copy of
+the data member is not necessary on all objects
+
+we can do so by declaring a data member as "static" 
+	A good use for this is for example to keep count of how many objects of that class exist 
+	or to have access to a constant value in the class definition
+
+static data members and member functions exist even if not objects of that class have been instantiated

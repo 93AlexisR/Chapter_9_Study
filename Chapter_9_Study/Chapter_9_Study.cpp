@@ -8,9 +8,9 @@ int main()
 {
 	//cascaded function call test
 	Time myClock;
-	myClock.setHour(11).setMinute(10).setSecond(59);
-	cout << "yes I work, leave me alone!" << endl;
-	cout << myClock.getHour() << myClock.getMinute() << myClock.getSecond() << endl;
+	myClock.setHour(15).setMinute(10).setSecond(59);
+	cout << myClock.toStandardString() << endl;
+	cout << myClock.toUniversalString() << endl;
 	return 0;
 }
 

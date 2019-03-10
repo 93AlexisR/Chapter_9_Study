@@ -32,47 +32,14 @@ to know only
 
 */
 
-class Account {
-public:
-
-	explicit Account(std::string accountName) // if given a string then it will create account with name passed by argument
-		: name{ accountName } { 	// explicit because it only takes 1 parameter only
-		setName(accountName);
-	}
-	~Account();
-
-	Account(std::string accountName, int initBalance)
-		: name(accountName) {
-		balance = initBalance;
-	}
-
-	void withdraw(unsigned int);
-	void withdraw(std::string);
-
-	void setName(std::string);
-	std::string getName() const;
-
-	void deposit(int);
-	void deposit(std::string);
-
-	int getBalance(void);
-
-private:
-	std::string name;
-	int balance{ 0 };
-};
-
-
 class Time {
 public:
-	explicit Time(void)
-		:hour(0), minute(0), second(0) {
-		//empty body
+	explicit Time(void){
+		Time(0, 0, 0);
 	}
 
-	Time(unsigned int hours, unsigned int minutes, unsigned int seconds)
-		: hour(hours), minute(minutes), second(seconds) {
-		//do notha
+	Time(unsigned int hours, unsigned int minutes, unsigned int seconds){
+		setTime(0, 0, 0);
 	}
 
 	//the Time& return type enables cascading
@@ -81,9 +48,9 @@ public:
 	Time& setMinute(unsigned int);
 	Time& setSecond(unsigned int);
 
-	unsigned int getHour(void) const;
-	unsigned int getMinute(void) const;
-	unsigned int getSecond(void) const;
+	unsigned int getHour(void) const { return hour; }
+	unsigned int getMinute(void) const { return minute; }
+	unsigned int getSecond(void) const { return second; }
 	std::string toUniversalString() const;
 	std::string toStandardString() const;
 
