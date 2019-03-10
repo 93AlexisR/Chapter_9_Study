@@ -1,2 +1,31 @@
 These are notes for chapter 9 of Deitel's How to Program C++
 
+Client code can access a class public members with the: 
+	- Dot operator (.)
+	- Arrow operator (->) (pointer to an object)
+
+Predicate function: function tests truth or false conditions
+
+private members are meant to be accessed by the class public functions but not intended to be used
+by the clients of the class 
+
+const objects and const member functions to prevent modifications (principle of least privilege)
+
+_________________________
+
+9.2 Separating class from implementation 
+
+The header is meant to be a document to open and read; documentation. There should be no 
+implementation whatsoever of the code in the header file. 
+
+The client of a class only needs to know: 
+	- What member functions to call
+	- What arguments to provide to each member function
+	- What return type to expect from each member function
+
+Class implementation being hidden shoudl eliminate changes to client code based on implementation
+
+p.1178
+____________________________
+
+class definition	
