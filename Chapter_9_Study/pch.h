@@ -65,7 +65,7 @@ private:
 
 class Time {
 public:
-	Time(void)
+	explicit Time(void)
 		:hour(0), minute(0), second(0) {
 		//empty body
 	}
@@ -75,12 +75,7 @@ public:
 		//do notha
 	}
 
-	~Time() {
-		hour = 0;
-		minute = 0;
-		hour = 0;
-	}
-
+	//the Time& return type enables cascading
 	Time& setTime(unsigned int hours, unsigned int minutes, unsigned int seconds);
 	Time& setHour(unsigned int);
 	Time& setMinute(unsigned int);

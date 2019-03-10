@@ -28,4 +28,62 @@ Class implementation being hidden shoudl eliminate changes to client code based 
 p.1178
 ____________________________
 
-class definition	
+P. 1184 - Selection Operators
+
+We can reference an object with the dot (.) operator as such: myObject.myFunction(myArg);
+
+We can also reference an object<s members via a pointer to an object:
+Follow the poionter name by the arrow member-selection operator (->) and the member name: 
+	pointerName -> memberName();
+
+__________________________
+
+Access functions and Utility functions - P 1186 - 9.5
+
+Access functions can read or display data, thus they are always const. They are called 
+predicate functions. 
+
+Many programmers will name predicate functions such as "isAM(void)" or "isPM(void)" such that they
+return true or false
+
+Utility function (helper function) is a private member function that supports the operation
+of a class<s other member functions. 
+_________________________
+
+9.7 Destructors 
+
+A destructor is another type of special member function. It is declared with :
+	- "~ClassName()"
+
+The job of a destructor is to do termination housekeeping
+
+_________________________
+
+9.13 friend Functions and friend Classes 
+
+a friend function of a calss is a non-member function that has the right to access public and 
+non-public class memnbers. 
+
+To declare a non-member function as a friend of a class you may do so by placing the function
+prototype in the class definition  and preceding it with the keyword friend
+
+OR if you wish to declare all member functions of another ClassTwo as friends of ClassOne: 
+	- "friend class ClassTwo" inside of the definition of ClassOne
+_________________________
+
+9.14 - Using the this Pointer
+
+There is only one copy of each class's functionality, but there can be many objects of that class
+How do member functions know which object<s data members to manipulate?
+
+Every object has aaccess to its own address through a pointer called this 
+The "this" pointer is not part of the object; it is passed implicitly by the compiler to each 
+objhects non-static member functions
+
+We can minimize the proliferation of identifier names by using the this-> pointer
+
+9.14.2 - Using the "this" POINTER TO ENABLE CASCADED FUNCTION CALLS
+
+Cascaded function calls: invoking multiple functions sequentially in the same statements. 
+
+This can be done like this: 

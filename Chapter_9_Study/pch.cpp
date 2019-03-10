@@ -84,6 +84,7 @@ Time& Time::setTime(unsigned int hour, unsigned int minute, unsigned int second)
 		throw std::invalid_argument(
 			"Hour, minute and/or second is out of range");
 	}
+	return *this;
 }
 
 Time& Time::setHour(unsigned int hour) {
@@ -98,7 +99,7 @@ Time& Time::setHour(unsigned int hour) {
 }
 
 Time& Time::setMinute(unsigned int minute) {
-	if (minute >= 0 && minute < 24) {
+	if (minute >= 0 && minute < 60) {
 		this->minute = minute;
 	}
 	else {
@@ -108,13 +109,14 @@ Time& Time::setMinute(unsigned int minute) {
 	return *this;
 }
 Time& Time::setSecond(unsigned int second) {
-	if (second >= 0 && second < 24) {
+	if (second >= 0 && second < 60) {
 		this->second = second;
 	}
 	else {
 		throw std::invalid_argument(
 			"Second must be 0-60");
 	}
+	return *this;
 }
 
 //get functions
