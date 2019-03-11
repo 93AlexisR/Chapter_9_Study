@@ -1,69 +1,46 @@
+#include "pch.h"
 #include "Employee.h"
 
-Account::~Account() {
-	std::cout << "\nDestructor running!";
+//define and initialize static data member at global namespace scope
+unsigned int Employee::count{ 0 };
+
+
+Employee::Employee(const std::string& firstName1, const std::string& lastName) {
+	this->setFirstName(firstName1).setLastName(lastName);
+	count = 1;
+	std::cout << "The name set is: " << getName() << std::endl;
+	
 }
 
-void Account::withdraw(unsigned int withdrawal) {
-	if (balance >= static_cast<int>(withdrawal) || !(typeid(unsigned int) == typeid(withdrawal))) { // check if withrawal is an unsigned int
-		balance -= withdrawal;
-	}
-	else {
-		std::cout << "Insufficient funds or invalid amount." << std::endl;
-	}
+Employee::Employee(void){
+	std::string myString = "Jonathan";
+	std::string hisString = "Smither";
+	Employee::Employee(myString, hisString); 
 }
 
-void Account::withdraw(std::string withdrawal) {
-	int intMoney = 0;
-	std::stringstream money(withdrawal);
-	money >> intMoney;
-	if (balance >= intMoney && intMoney > 0) {
-		balance -= intMoney;
-	}
-	else {
-		std::cout << "Insufficient funds or invalid amount." << std::endl;
-	}
+Employee::~Employee() {
+	count--;
 }
 
-int Account::getBalance() {
-	return balance;
-}
-
-void Account::deposit(int moneys) {
-	if (moneys > 0) {
-		balance += moneys;
+Employee& Employee::setFirstName(const std::string& firstName) {
+	if (isAlphaStrict(firstName)) {
+		this->firstName = firstName;
 	}
-	//else, explode
+	return *this;
 }
-
-void Account::deposit(std::string moneys) {
-	int intMoney = 0;
-	std::stringstream money(moneys);
-	money >> intMoney;
-	if (intMoney > 0) {
-		balance += intMoney;
+Employee& Employee::setLastName(const std::string& lastName) {
+	if (isAlphaStrict(lastName)) {
+		this->lastName = lastName;
 	}
+	return *this;
 }
 
-void Account::setName(std::string accountName) { //ENSURE ALL ALPHA and spaces
-	while (true) {
-		bool nameFlag = 0;
-		for (unsigned int i = 0; i < accountName.length(); i++) {
-			if (!isalpha(accountName[i]) && (accountName[i] != 32)) {
-				std::cout << "Erroronous character: '" << accountName[i] << "' on position " << i << " for name " << accountName << ".\nPlease try again: ";
-				getline(std::cin, accountName);
-				nameFlag = 1;
-				break;
-			}
-		}
-		if (nameFlag == 0) {
-			//cout << "we breaking out!\n";
-			break;
-		}
-	}
-	name = accountName;
-}
+const std::string Employee::getName(void) {
+	std::ostringstream output; //whats ostringstream
+	output << getFirstName() << " " << getLastName();
+	return output.str();
+} //returns full name
 
-std::string Account::getName() const {
-	return name;
-}
+//static member function
+//static unsigned int Employee::getCount(void);
+

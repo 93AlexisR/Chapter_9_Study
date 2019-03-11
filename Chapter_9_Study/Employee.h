@@ -1,32 +1,33 @@
-#pragma once
+#ifndef EMPLOYEE_H
+#define EMPLOYEE_H
 #include "pch.h"
 
-class Account {
+
+
+
+class Employee {
 public:
+	Employee(const std::string& firstName, const std::string& lastName);
+	Employee(void);
+	~Employee();
 
-	explicit Account(std::string accountName) // if given a string then it will create account with name passed by argument
-		: name{ accountName } { 	// explicit because it only takes 1 parameter only
-		setName(accountName);
-	}
-	~Account();
+	Employee& setFirstName(const std::string& firstName);
+	Employee& setLastName(const std::string& lastName);
 
-	Account(std::string accountName, int initBalance)
-		: name(accountName) {
-		balance = initBalance;
-	}
+	const std::string getFirstName(void) { return firstName; } 
+	const std::string getLastName(void) { return lastName; }
+	const std::string getName(void); //returns full name
+	const static unsigned int getCount(void) { return count; }
 
-	void withdraw(unsigned int);
-	void withdraw(std::string);
-
-	void setName(std::string);
-	std::string getName() const;
-
-	void deposit(int);
-	void deposit(std::string);
-
-	int getBalance(void);
+	//static member function
 
 private:
-	std::string name;
-	int balance{ 0 };
+	std::string firstName;
+	std::string lastName;
+	static unsigned int count; //should be static
+
 };
+
+
+
+#endif EMPLOYEE_H

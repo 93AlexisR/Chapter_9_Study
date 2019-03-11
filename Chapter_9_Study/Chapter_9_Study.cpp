@@ -1,16 +1,35 @@
 // chapter_9_study.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
 #include "pch.h"
+#include "Employee.h"
+#include "Account.h"
+#include "Time.h"
 using namespace std;
+
+
+
+
+class Sentence {
+public:
+	Sentence(const std::string &myString) {
+		this->myString = myString;
+	}
+	std::string getString(void) { return myString; }
+	string myString;
+};
+
+
 
 int main()
 {
-	//cascaded function call test
-	Time myClock;
-	myClock.setHour(15).setMinute(10).setSecond(59);
-	cout << myClock.toStandardString() << endl;
-	cout << myClock.toUniversalString() << endl;
+	Employee empOne;
+	//Employee test2("John", "Smithan");
+	cout << empOne.getName() << endl;
+
+
+	cout << Employee::getCount() << endl;
+
+
 	return 0;
 }
 
