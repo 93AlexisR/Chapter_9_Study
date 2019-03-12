@@ -2,13 +2,13 @@
 #include "Employee.h"
 
 //define and initialize static data member at global namespace scope
-unsigned int Employee::count{ 0 };
+//unsigned int Employee::count{ 0 };
 
 
 Employee::Employee(const std::string& firstName1, const std::string& lastName) {
 	this->setFirstName(firstName1).setLastName(lastName);
-	count = 1;
-	std::cout << "The name set is: " << getName() << std::endl;
+	count++;
+	//std::cout << "The name set is: " << getName() << std::endl;
 	
 }
 

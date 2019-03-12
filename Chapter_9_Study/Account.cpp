@@ -30,7 +30,7 @@ Account& Account::setName(std::string accountName) { //ENSURE ALL ALPHA and spac
 	bool isValid = 1;
 	for (unsigned int i = 0; i < accountName.length(); i++) {
 		if (!isalpha(accountName[i]) && (accountName[i] != 32)) {
-			std::cout << "Erroronous character: '" << accountName[i] << "' on position " << i << " for name " << accountName;
+			std::cout << "Erroronous character: '" << accountName[i] << " on position " << i << " for name " << accountName;
 			getline(std::cin, accountName);
 			isValid = 0;
 			break;

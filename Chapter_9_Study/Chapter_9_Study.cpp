@@ -7,26 +7,27 @@
 using namespace std;
 
 
+class mySphere {
+	static unsigned int sphereCount;
+	double radius{ 1.0 };
 
-
-class Sentence {
 public:
-	Sentence(const std::string &myString) {
-		this->myString = myString;
-	}
-	std::string getString(void) { return myString; }
-	string myString;
+	mySphere(void) { sphereCount++; }
+	~mySphere(void) { sphereCount--; }
+	static unsigned int getCount(void) { return sphereCount; }
 };
+unsigned int mySphere::sphereCount{ 0 };
+unsigned int Employee::count{ 0 };
 
 
 
 int main()
 {
-	Employee empOne;
-	//Employee test2("John", "Smithan");
-	cout << empOne.getName() << endl;
 
+	mySphere mySpheres[10];
+	cout << mySphere::getCount() << endl;
 
+	Employee myEmployees[10];
 	cout << Employee::getCount() << endl;
 
 
