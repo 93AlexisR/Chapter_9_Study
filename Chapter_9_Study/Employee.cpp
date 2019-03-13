@@ -2,20 +2,18 @@
 #include "Employee.h"
 
 //define and initialize static data member at global namespace scope
-//unsigned int Employee::count{ 0 };
+unsigned int Employee::count{ 0 };
 
 
 Employee::Employee(const std::string& firstName1, const std::string& lastName) {
 	this->setFirstName(firstName1).setLastName(lastName);
 	count++;
-	//std::cout << "The name set is: " << getName() << std::endl;
 	
 }
 
 Employee::Employee(void){
-	std::string myString = "Jonathan";
-	std::string hisString = "Smither";
-	Employee::Employee(myString, hisString); 
+	count++; //since destructor will be called after the below call since the scope ends
+	Employee::Employee("Jane", "Doe");
 }
 
 Employee::~Employee() {

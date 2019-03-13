@@ -1,34 +1,18 @@
 // chapter_9_study.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 #include "pch.h"
-#include "Employee.h"
-#include "Account.h"
-#include "Time.h"
 using namespace std;
 
 
-class mySphere {
-	static unsigned int sphereCount;
-	double radius{ 1.0 };
-
-public:
-	mySphere(void) { sphereCount++; }
-	~mySphere(void) { sphereCount--; }
-	static unsigned int getCount(void) { return sphereCount; }
-};
-unsigned int mySphere::sphereCount{ 0 };
-unsigned int Employee::count{ 0 };
 
 
 
 int main()
 {
-
-	mySphere mySpheres[10];
-	cout << mySphere::getCount() << endl;
-
-	Employee myEmployees[10];
-	cout << Employee::getCount() << endl;
+	RandEngine myEngine;
+	for (unsigned int i = 0; i < 10; i++) {
+		cout << myEngine.trueRand() << endl;
+	}
 
 
 	return 0;
