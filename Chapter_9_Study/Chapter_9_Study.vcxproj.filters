@@ -33,6 +33,9 @@
     <ClInclude Include="RandEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HugeInteger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="RandEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HugeInteger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

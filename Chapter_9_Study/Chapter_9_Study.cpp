@@ -10,8 +10,8 @@ using namespace std;
 int main()
 {
 	RandEngine myEngine;
-	for (unsigned int i = 0; i < 10; i++) {
-		cout << myEngine.trueRand() << endl;
+	for (unsigned int i = 0; i < 10000; i++) {
+		cout << myEngine.myRand(9) << endl;
 	}
 
 
