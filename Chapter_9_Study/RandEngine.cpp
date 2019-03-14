@@ -1,7 +1,7 @@
 #include "RandEngine.h"
 #include "PCH.h"
 
-
+unsigned int RandEngine::theSeed = static_cast<unsigned int>(time(NULL)); //adds some chaos by making the variable static
 
 RandEngine::RandEngine(void) {
 	unsigned int i = 4000000000;
@@ -16,8 +16,8 @@ RandEngine::RandEngine(void) {
 	}
 }
 
-RandEngine::RandEngine(unsigned int customSeed)
-	: theSeed(customSeed) {
+RandEngine::RandEngine(unsigned int customSeed){
+	theSeed = customSeed;
 	RandEngine();
 }
 

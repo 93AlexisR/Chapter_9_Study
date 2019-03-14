@@ -23,3 +23,4 @@ const bool isAlphaStrict(const std::string&); // returns true if string contains
 const bool isAlphaNum(const std::string&); // returns true if contains alphanum characters and spaces
 const bool isAlphaNumStrict(const std::string&); //returns true if contains Alphanum + spaces
 
+const int charToInt(char& convertMe);

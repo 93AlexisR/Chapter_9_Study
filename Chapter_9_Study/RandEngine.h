@@ -2,8 +2,8 @@
 #include <iostream>
 class RandEngine {
 private:
-	unsigned int theSeed;
 	unsigned int unsignedLimit;
+	static unsigned int theSeed;
 
 public:
 	RandEngine(void);
