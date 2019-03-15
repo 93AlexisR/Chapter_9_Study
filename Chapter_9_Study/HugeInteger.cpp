@@ -59,20 +59,23 @@ HugeInteger HugeInteger::add(HugeInteger otherHugeInt) {
 		cout << "i is: " << i << endl;
 		//cout << "(yugeInt[i] + otherHugeInt.yugeInt[i]) is equal to: " << static_cast<unsigned int>(yugeInt[i] + otherHugeInt.yugeInt[i]) << endl;
 		if ((yugeInt[i] + otherHugeInt.yugeInt[i]) > 9){
-			if (i = 0) {
+			if (i == 0) {
 				cout << "HugeInteger overflow" << endl;
 				abort();
 			}
 			else{
-				tempValues[i] += (otherHugeInt.yugeInt[i] - 10);
+				cout << "tempValues[" << i << "] before the carry over = " << tempValues[i] << endl;
+				cout << "yugeInt[i] + tempValues[i] + otherHugeInt.yugeInt[i] - 10 is eq. to " << 
+					tempValues[i] << " + " << otherHugeInt.yugeInt[i] << " + " << yugeInt[i] << " - 10" << endl;
+				tempValues[i] += (yugeInt[i] + otherHugeInt.yugeInt[i] - 10);
 				tempValues[i-1] = 1;
-				cout << "carrying over... yuge[i-1] is " << tempValues[i-1] << 
-					"and [i] is " << tempValues[i] << endl;
+				cout << "tempValues[" << i << "] after the carry over = " << tempValues[i] << endl;
+				cout << "tempValues[" << i-1 << "] after the carry over = " << tempValues[i-1] << endl;
 
 			}
 		}
 		else { 
-			tempValues[i] = yugeInt[i] + otherHugeInt.yugeInt[i]; 
+			tempValues[i] += yugeInt[i] + otherHugeInt.yugeInt[i]; 
 		}
 	}
 	return HugeInteger(tempValues);

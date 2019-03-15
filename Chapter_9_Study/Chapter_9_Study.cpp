@@ -9,8 +9,8 @@ using namespace std;
 
 int main(){
 
-	string testString{ "11115" };
-	string secondString{ "11119" };
+	string testString{ "1111458567895677823411114585678956778234" };
+	string secondString{ "9111458567895677823411114585678956778234" };
 	string thirdSthring{ "000" };
 	HugeInteger myInt(testString);
 	HugeInteger myOtherInt(secondString);
