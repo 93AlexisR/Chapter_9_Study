@@ -7,15 +7,18 @@ using namespace std;
 
 
 
-int main()
-{
-	RandEngine myEngine;
-	for (unsigned int i = 0; i < 10000; i++) {
-		cout << myEngine.myRand(9) << endl;
-	}
+int main(){
 
+	string testString{ "11115" };
+	string secondString{ "11119" };
+	string thirdSthring{ "000" };
+	HugeInteger myInt(testString);
+	HugeInteger myOtherInt(secondString);
+	HugeInteger bestInt(thirdSthring);
+	HugeInteger myTest(myInt.add(myOtherInt));
+	myTest.printVal();
 
-	return 0;
+	return 0;			
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

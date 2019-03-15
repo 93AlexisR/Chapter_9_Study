@@ -13,4 +13,5 @@
 #include "Account.h"
 #include "Time.h"
 #include <Windows.h>
+#include "HugeInteger.h"
 #endif //PCH_H
