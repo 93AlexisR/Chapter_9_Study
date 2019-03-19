@@ -34,7 +34,7 @@ HugeInteger::HugeInteger(unsigned short int newArray[], bool newSignBit) {
 	signBit = newSignBit;
 	for (unsigned int i = 0; i < arraySize; i++) {
 		this->yugeInt[i] = newArray[i];
-		//cout << "intConstructor running... i = " << i << " and yugeInt[i] = " << yugeInt[i] << endl;
+		cout << "intConstructor running... i = " << i << " and yugeInt[i] = " << yugeInt[i] << endl;
 	}
 }
 
@@ -43,15 +43,15 @@ HugeInteger::~HugeInteger(){
 
 HugeInteger& HugeInteger::printVal(void) {
 	for (unsigned int i = 0; i < arraySize; i++) {
-		cout << yugeInt[i] << endl;
+		cout << "yugeInt[" << i << "] = " << yugeInt[i] << endl;
 		if (yugeInt[i] != 0) {
 			for (unsigned int j = i; j < arraySize; j++) {
-				cout << yugeInt[j];
+				cout << yugeInt[i];
 			}
 			break;
-			return *this;
 		}
 	}
+	return *this;
 }
 
 

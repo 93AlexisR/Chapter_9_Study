@@ -14,7 +14,7 @@ int main(){
 	HugeInteger myInt(testString);
 	HugeInteger myOtherInt(secondString);
 	HugeInteger addition(myInt.add(myOtherInt));
-	addition.printVal();
+	myInt.printVal();
 
 	//HugeInteger difference(myInt.subtract(myOtherInt));
 
