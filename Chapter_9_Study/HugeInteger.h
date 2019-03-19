@@ -30,5 +30,6 @@ public:
 
 
 	bool isLarger(HugeInteger otherHugeInt);
+	bool isPos(void);
 };
 
