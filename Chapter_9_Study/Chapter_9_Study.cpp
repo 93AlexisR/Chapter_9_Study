@@ -9,14 +9,16 @@ using namespace std;
 
 int main(){
 
-	string testString{ "1111458567895677823411114585678956778234" };
-	string secondString{ "9111458567895677823411114585678956778234" };
-	string thirdSthring{ "000" };
+	string testString{ "4563456456543456344" };
+	string secondString{ "93453456341321" };
 	HugeInteger myInt(testString);
 	HugeInteger myOtherInt(secondString);
-	HugeInteger bestInt(thirdSthring);
-	HugeInteger myTest(myInt.add(myOtherInt));
-	myTest.printVal();
+	myInt.printVal();
+	cout << endl;
+	myOtherInt.printVal();
+	cout << endl;
+
+	cout << "Is " << secondString << " larger than " << testString << "?..:" << ((myOtherInt.isLarger(myInt)) ? "yes" : "no");
 
 	return 0;			
 }
