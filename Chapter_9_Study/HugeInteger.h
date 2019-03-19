@@ -5,20 +5,22 @@ class HugeInteger
 {
 private:
 	
-	bool signBit{ 1 };
 	unsigned int arraySize{ sizeof(yugeInt) / sizeof(*yugeInt) };
 	unsigned int stringSize{ 0 };
-	
-
 protected:
 	short unsigned int yugeInt[40] = { 0 };
-	short unsigned int getPosVal(unsigned int position);
+	bool signBit{ 1 };
+	HugeInteger(unsigned short int myVal[]);
+	HugeInteger(string& charVal, bool newSignBit);
+	HugeInteger(unsigned short int newArray[], bool newSignBit);
+
+	HugeInteger flipBit(HugeInteger flipMyBit);
+
 
 public:
 
 	HugeInteger(void);
 	HugeInteger(string& myVal);
-	HugeInteger(int myVal[]);
 
 	~HugeInteger();
 
@@ -26,9 +28,7 @@ public:
 	HugeInteger add(HugeInteger otherHugeInt);
 	HugeInteger subtract(HugeInteger otherHugeInt);
 
-	bool isLarger(HugeInteger otherVal);
-	bool isPos(void);
-	bool isNeg(void) { return !isPos(); }
 
+	bool isLarger(HugeInteger otherHugeInt);
 };
 
