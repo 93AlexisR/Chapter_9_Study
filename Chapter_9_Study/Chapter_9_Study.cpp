@@ -13,7 +13,7 @@ int main(){
 	string secondString{ "10" };
 	HugeInteger myInt(testString);
 	HugeInteger myOtherInt(secondString);
-	HugeInteger addition(myInt.add(myOtherInt));
+	//HugeInteger addition(myInt.add(myOtherInt));
 	myInt.printVal();
 
 	//HugeInteger difference(myInt.subtract(myOtherInt));

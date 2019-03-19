@@ -6,10 +6,11 @@ HugeInteger::HugeInteger(string& charVal, bool newSignBit) {
 	signBit = newSignBit;
 	stringSize = static_cast<unsigned int>(charVal.size());
 	for (unsigned int i = 0; i < arraySize; i++) {
-		if (i < (arraySize - stringSize) ) { 
+		if (i < (arraySize - stringSize) ) { // initialize to 0 until non-zero value is expected
 			yugeInt[i] = 0;
 		}
 		else {
+			cout << "charVal[" << i << "] = " << charToInt(charVal[i - (arraySize - stringSize)]) << endl;
 			yugeInt[i] = charToInt(charVal[i - (arraySize - stringSize)]);
 		}
 	}
@@ -34,11 +35,12 @@ HugeInteger::HugeInteger(unsigned short int newArray[], bool newSignBit) {
 	signBit = newSignBit;
 	for (unsigned int i = 0; i < arraySize; i++) {
 		this->yugeInt[i] = newArray[i];
-		cout << "intConstructor running... i = " << i << " and yugeInt[i] = " << yugeInt[i] << endl;
+		cout << "yugeInt[" << i << "] = " << yugeInt[i] << endl;
 	}
 }
 
 HugeInteger::~HugeInteger(){
+	cout << "I am destructoring" << endl;
 }
 
 HugeInteger& HugeInteger::printVal(void) {
