@@ -9,15 +9,6 @@ using namespace std;
 
 int main(){
 
-	string testString{ "11115" };
-	string secondString{ "11119" };
-	string thirdSthring{ "000" };
-	HugeInteger myInt(testString);
-	HugeInteger myOtherInt(secondString);
-	HugeInteger bestInt(thirdSthring);
-	HugeInteger myTest(myInt.add(myOtherInt));
-	myTest.printVal();
-
 	return 0;			
 }
 
