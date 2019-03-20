@@ -6,23 +6,13 @@ using namespace std;
 
 
 
-
 int main(){
 
-	string testString{ "-111" };
-	string secondString{ "11" };
-	HugeInteger myInt(testString);
-	HugeInteger myOtherInt(secondString);
-	//HugeInteger addition(myInt.add(myOtherInt));
-	cout << endl;
-	myInt.flipBit();
-	cout << myInt.printString() << endl;
-	//cout << addition.printString();
-	//HugeInteger substract(myInt.subtract(myOtherInt));
-	//cout << myInt.isLarger(myOtherInt);
+	string testString{ "861" };
+	string testTube{ "1234567890" };
 
-	//HugeInteger difference(myInt.subtract(myOtherInt));
 
+	
 	return 0;			
 }
 

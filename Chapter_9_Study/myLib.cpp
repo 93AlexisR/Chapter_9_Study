@@ -45,7 +45,7 @@ const bool isAlphaNumStrict(const std::string& testString) { //returns true if c
 }
 
 
-const int charToInt(char& convertMe) {
+const int charToInt(const char& convertMe) {
 	if (convertMe < 48 || convertMe > 57) {
 		std::cout << "invalid value, aborting (charToInt function crash)" << std::endl;
 		abort();
@@ -72,3 +72,11 @@ const char intToChar(const unsigned short int myChar) {
 	return static_cast<char>(newChar);
 }
 
+const unsigned int strToInt(const std::string& myString) {	
+	unsigned short stringSize{ static_cast<unsigned short>(myString.size() - 1) };
+	unsigned int tempValue{ 0 };
+	for ( int i = stringSize; i >= 0; i--) {
+		tempValue += static_cast<unsigned int>(charToInt(myString[i])*pow(10, stringSize-i));
+	}
+	return tempValue;
+}

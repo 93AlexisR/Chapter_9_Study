@@ -23,7 +23,7 @@ const bool isAlphaStrict(const std::string&); // returns true if string contains
 const bool isAlphaNum(const std::string&); // returns true if contains alphanum characters and spaces
 const bool isAlphaNumStrict(const std::string&); //returns true if contains Alphanum + spaces
 
-const int charToInt(char& convertMe);
+const int charToInt(const char& convertMe);
 std::string vecToString(const std::vector<char> fakeString);
 
 const char intToChar(const unsigned short int myChar);
@@ -31,3 +31,5 @@ const char intToChar(const short int myChar) { return intToChar(static_cast<unsi
 const char intToChar(const int myChar) { return intToChar(static_cast<unsigned short int>(myChar)); }
 const char intToChar(const long int myChar) { return intToChar(static_cast<unsigned short int>(myChar)); }
 const char intToChar(const unsigned long int myChar) { return intToChar(static_cast<unsigned short int>(myChar)); }
+
+const unsigned int strToInt (const std::string& myString);

@@ -19,7 +19,7 @@ protected:
 public:
 
 	HugeInteger(void);
-	HugeInteger(string myVal);
+	HugeInteger(string& myVal);
 	void print(void);
 	~HugeInteger();
 	HugeInteger flipBit(HugeInteger flipMyBit);

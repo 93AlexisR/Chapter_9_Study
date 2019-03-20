@@ -6,15 +6,13 @@ HugeInteger::HugeInteger(string& charVal, bool newSignBit) {
 	signBit = newSignBit;
 	stringSize = static_cast<unsigned int>(charVal.size());
 	if (!signBit) {
-		//cout << "entering !signBit" << endl;
-		stringSize--;
 		for (unsigned int i = 0; i < arraySize; i++) {
 			if (i < (arraySize - stringSize)) { // initialize to 0 until non-zero value is expected
 				yugeInt[i] = 0;
 			}
 			else {
 				//cout << "charVal[" << i << "] = " << charToInt(charVal[i - (arraySize - stringSize)]) << endl;
-				//yugeInt[i] = charToInt(charVal[i - (arraySize - stringSize)]);
+				yugeInt[i] = charToInt(charVal[i - (arraySize - stringSize)]);
 			}
 		}
 		return;
@@ -32,10 +30,9 @@ HugeInteger::HugeInteger(string& charVal, bool newSignBit) {
 	}
 }
 
-HugeInteger::HugeInteger(string charVal) {
-	if (static_cast<unsigned int>(charVal[0]) == 45) {
-		charVal[0] = 48;
-		//cout << "This is a negative number!"  << endl;
+HugeInteger::HugeInteger(string& charVal) {
+	if (charVal[0] == '-') {
+		charVal[0] = '0';
 		*this = HugeInteger(charVal, false);
 	}
 	else {
@@ -43,12 +40,10 @@ HugeInteger::HugeInteger(string charVal) {
 	}
 }
 
-
 HugeInteger::HugeInteger(void) {
 	string tempString{ "0" };
 	*this = HugeInteger(tempString, true);
 }
-
 
 HugeInteger::HugeInteger(unsigned short int newArray[]) {
 	*this = HugeInteger(newArray, true);
@@ -72,13 +67,20 @@ void HugeInteger::print(void) {
 
 string HugeInteger::printString(void) {
 	string tempString;
-	for (unsigned int i = 0; i < arraySize; i++) {
+	for (int i = 0; i < arraySize; i++) {
 			//cout << "yugeInt[" << i << "] = " << yugeInt[i] << endl;
 			if (yugeInt[i] != 0) {
-				tempString.resize(arraySize-i);
+				tempString.resize(arraySize - i + 1);
+				if (!signBit) {
+					i--;
+				}
 				for (unsigned int j = i; j < arraySize; j++) {
 					//cout << "tempString[" << j << " - " << i << "] = " << yugeInt[j] << endl;
 					tempString[j-i] = intToChar(yugeInt[j]);
+				}
+				if (!signBit) {
+					i--;
+					tempString[0] = '-';
 				}
 				break;
 			}
@@ -128,7 +130,7 @@ HugeInteger HugeInteger::add(HugeInteger otherHugeInt) {
 			else {
 				tempValues[i] += yugeInt[i] + otherHugeInt.yugeInt[i];
 			}
-			std::cout << tempValues[i] << endl;
+			//std::cout << tempValues[i] << endl;
 		}
 		return HugeInteger(tempValues);
 	}
@@ -193,7 +195,7 @@ HugeInteger HugeInteger::subtract(HugeInteger otherHugeInt) {
 			abort();
 		}
 		
-		for (unsigned int i = arraySize - 1; i > arraySize - stringSize -1 ; i--) {
+		for (int i = arraySize - 1; i > arraySize - stringSize -1 ; i--) {
 			//cout << "owedFlag = " << owedFlag ? "TRUE" : "FALSE";
 			//cout << endl;
 			//cout << "owedPosition = " << owedPosition << endl;
