@@ -9,12 +9,17 @@ using namespace std;
 
 int main(){
 
-	string testString{ "15" };
-	string secondString{ "10" };
+	string testString{ "-111" };
+	string secondString{ "11" };
 	HugeInteger myInt(testString);
 	HugeInteger myOtherInt(secondString);
 	//HugeInteger addition(myInt.add(myOtherInt));
-	myInt.printVal();
+	cout << endl;
+	myInt.flipBit();
+	cout << myInt.printString() << endl;
+	//cout << addition.printString();
+	//HugeInteger substract(myInt.subtract(myOtherInt));
+	//cout << myInt.isLarger(myOtherInt);
 
 	//HugeInteger difference(myInt.subtract(myOtherInt));
 

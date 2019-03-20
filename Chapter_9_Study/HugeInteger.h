@@ -14,17 +14,18 @@ protected:
 	HugeInteger(string& charVal, bool newSignBit);
 	HugeInteger(unsigned short int newArray[], bool newSignBit);
 
-	HugeInteger flipBit(HugeInteger flipMyBit);
 
 
 public:
 
 	HugeInteger(void);
-	HugeInteger(string& myVal);
-
+	HugeInteger(string myVal);
+	void print(void);
 	~HugeInteger();
+	HugeInteger flipBit(HugeInteger flipMyBit);
+	HugeInteger flipBit(void) { return flipBit(*this); }
 
-	HugeInteger& printVal(void);
+	string printString(void);
 	HugeInteger add(HugeInteger otherHugeInt);
 	HugeInteger subtract(HugeInteger otherHugeInt);
 
