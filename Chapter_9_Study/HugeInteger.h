@@ -11,12 +11,10 @@ public:
 
 
 	HugeInteger& setValues(string& charVal, bool newSignBit);
-	HugeInteger& setValues(unsigned short int newArray[], bool newSignBit);
+	HugeInteger& setValues(unsigned short int newArray[], bool newSignBit); 
 	HugeInteger& setValues(const HugeInteger &otherInt);
-	HugeInteger& setValues(string& charVal);
+	HugeInteger& setValues(string& charVal); //function user will need
 	HugeInteger& setValues(HugeInteger &otherInt);
-	HugeInteger& setValues(HugeInteger flipMyBit, bool signBit);
-	HugeInteger& setValues(unsigned short tempValues[]);
 
 	short unsigned int yugeInt[40] = { 0 };
 	bool signBit{ 1 };
@@ -24,10 +22,7 @@ public:
 	HugeInteger(unsigned short int newArray[], bool newSignBit);
 	HugeInteger(void);
 	HugeInteger(string& myVal);
-	HugeInteger(const HugeInteger &otherInt);
 	HugeInteger(HugeInteger flipMyBit, bool newBit);
-	HugeInteger(unsigned short tempValues[]);
-	//HugeInteger flipBitMethod(void) { return HugeInteger(this->yugeInt, this->signBit);}
 
 
 

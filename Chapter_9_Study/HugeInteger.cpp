@@ -2,7 +2,7 @@
 #include "HugeInteger.h"
 using namespace std;
 
-HugeInteger& HugeInteger::setValues(string& charVal, bool signBit) {
+HugeInteger& HugeInteger::setValues(string& charVal, bool signBit) { //essential
 	this->signBit = signBit;
 	stringSize = static_cast<unsigned int>(charVal.size());
 	if (!this->signBit) {
@@ -31,26 +31,26 @@ HugeInteger& HugeInteger::setValues(string& charVal, bool signBit) {
 	return *this;
 }
 
-HugeInteger::HugeInteger(string& charVal, bool signBit) {
+HugeInteger::HugeInteger(string& charVal, bool signBit) { //essential
 	setValues(charVal, signBit);
 }
 
-HugeInteger& HugeInteger::setValues(string& charVal) {
-	setValues(charVal, true);
-	return *this;
-}
-
-HugeInteger::HugeInteger(string& charVal) {
+HugeInteger& HugeInteger::setValues(string& charVal) { //essential
 	if (charVal[0] == '-') {
 		charVal[0] = '0';
 		setValues(charVal, false);
 	}
 	else {
 		setValues(charVal, true);
-	}
+	}	
+	return *this;
 }
 
-HugeInteger::HugeInteger(void) {
+HugeInteger::HugeInteger(string& charVal) { //essential for user
+	setValues(charVal);
+}
+
+HugeInteger::HugeInteger(void) { //default
 	string tempString{ "0" };
 	setValues(tempString, true);
 }
@@ -67,16 +67,8 @@ HugeInteger& HugeInteger::setValues(unsigned short int newArray[], bool signBit)
 	return *this;
 }
 
-HugeInteger& HugeInteger::setValues(unsigned short tempValues[]){
-	setValues(tempValues, true);
-}
-
 HugeInteger::HugeInteger(unsigned short int newArray[], bool signBit) {
 	setValues(newArray, signBit);
-}
-
-HugeInteger::HugeInteger(unsigned short tempValues[]) {
-	setValues(tempValues);
 }
 
 HugeInteger& HugeInteger::setValues(const HugeInteger &otherInt) {
@@ -184,8 +176,9 @@ HugeInteger HugeInteger::add(HugeInteger otherHugeInt) {
 				tempValues[i] += yugeInt[i] + otherHugeInt.yugeInt[i];
 			}
 		}
+		return HugeInteger(tempValues, true);
 	}
-	return HugeInteger(tempValues);
+
 }
 
 bool HugeInteger::isLarger(HugeInteger otherValue) {
@@ -301,23 +294,23 @@ HugeInteger subtract(HugeInteger biggerInt, HugeInteger smallerInt) {
 	*/
 }
 
-HugeInteger& HugeInteger::setValues(HugeInteger flipMyBit, bool signBit) {
 
-	return *this;
-}
-
-
-
+/*
 HugeInteger::HugeInteger(const HugeInteger &flipMyBit) {
-	setValues(flipMyBit, signBit);
+	setValues(flipMyBit, flipMyBit.signBit);
 }
+HugeInteger& setValues(HugeInteger flipMyBit, bool signBit) {
 
-HugeInteger::HugeInteger(HugeInteger flipMyBit, bool signBit) {
-	setValues(flipMyBit, signBit);
 }
+*/
+
 
 HugeInteger flipBit(HugeInteger flipMyBit) {
 	//cout << "we're flipping stuff" << endl;
 	return HugeInteger(flipMyBit, !flipMyBit.signBit);
 }
+HugeInteger::HugeInteger(HugeInteger flipMyBit, bool signBit) {
+	setValues(flipMyBit.yugeInt, signBit);
+}
+
 

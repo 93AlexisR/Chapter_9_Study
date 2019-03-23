@@ -9,11 +9,13 @@ using namespace std;
 int main(){
 
 	string testString{ "11111" };
-	string otherString{ "100" };
+	string otherString{ "-100" };
 	HugeInteger myInt(testString);
 	HugeInteger myOtherInt(otherString);
-	HugeInteger lastInt;
-	cout << lastInt.printString();
+	HugeInteger lastInt = myInt.add(myOtherInt);
+	cout << myInt.add(myOtherInt).printString();
+	cout << endl;
+	cout << "yep" << endl;
 	return 0;			
 }
 
