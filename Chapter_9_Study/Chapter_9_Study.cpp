@@ -8,11 +8,12 @@ using namespace std;
 
 int main(){
 
-	string testString{ "861" };
-	string testTube{ "1234567890" };
-
-
-	
+	string testString{ "11111" };
+	string otherString{ "100" };
+	HugeInteger myInt(testString);
+	HugeInteger myOtherInt(otherString);
+	HugeInteger lastInt;
+	cout << lastInt.printString();
 	return 0;			
 }
 

@@ -9,3 +9,35 @@ std::string Time::toUniversalString(void) const {
 }
 
 
+_________________
+Foo::Foo(unsigned short* myVals, bool myBool) {
+	this->myBool = myBool;
+	unsigned int i = 0;
+	while (*myVals) {
+		this->myVals[i] = *myVals;
+		myVals++;
+		i++;
+		if (i == arraySize) {
+			break;
+		}
+	}
+}
+
+Foo::Foo(unsigned short myVals[]) {
+	*this = Foo(myVals, true);
+}
+
+Foo Foo::flipBit(void) {
+	return Foo(this->myVals, !this->myBool);
+}
+
+string Foo::print(void) {
+	string myString;
+	myString.resize(arraySize);
+	for (unsigned short i = 0; i < arraySize; i++) {
+		myString[i] = static_cast<char>(static_cast<unsigned short>(myVals[i]) + 48);
+	}
+	return myString;
+}
+
+
