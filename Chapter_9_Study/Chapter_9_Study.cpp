@@ -6,17 +6,14 @@ using namespace std;
 
 
 
-int main(){
-
-	string testString{ "11111" };
-	string otherString{ "-100" };
-	HugeInteger myInt(testString);
-	HugeInteger myOtherInt(otherString);
-	HugeInteger lastInt = myInt.add(myOtherInt);
-	cout << myInt.add(myOtherInt).printString();
-	cout << endl;
-	cout << "yep" << endl;
+int main() {
+	string myString("-2342345345");
+	string otherString("2345");
+	HugeInteger myInt(myString);
+	HugeInteger otherInt(otherString);
+	cout << otherInt.isLarger(myInt) << endl;
 	return 0;			
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
