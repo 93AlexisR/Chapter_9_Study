@@ -14,6 +14,13 @@ int main() {
 	cout << otherInt.isLarger(myInt) << endl;
 	return 0;			
 
+	string testString{ "11111" };
+	string otherString{ "100" };
+	HugeInteger myInt(testString);
+	HugeInteger myOtherInt(otherString);
+	HugeInteger lastInt;
+	cout << lastInt.printString();
+	return 0;			
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
