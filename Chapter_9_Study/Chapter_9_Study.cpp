@@ -7,19 +7,14 @@ using namespace std;
 
 
 int main() {
-	string myString("-2342345345");
-	string otherString("2345");
+	string myString("999999");
+	string otherString("9765471");
 	HugeInteger myInt(myString);
 	HugeInteger otherInt(otherString);
-	cout << otherInt.isLarger(myInt) << endl;
-	return 0;			
-
-	string testString{ "11111" };
-	string otherString{ "100" };
-	HugeInteger myInt(testString);
-	HugeInteger myOtherInt(otherString);
-	HugeInteger lastInt;
-	cout << lastInt.printString();
+	HugeInteger lastInt(otherInt.subtract(myInt));
+	if ((9765471 - 999999) == lastInt.getCppInt()) {
+		cout << "woo I work" << endl;
+	}
 	return 0;			
 }
 

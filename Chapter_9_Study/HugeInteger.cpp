@@ -97,6 +97,7 @@ HugeInteger::~HugeInteger(){
 
 HugeInteger& HugeInteger::copy(HugeInteger otherInt) {
 	this->signBit = otherInt.signBit;
+	this -> sigBits = otherInt.sigBits;
 	for (unsigned int i = 0; i < arraySize; i++) {
 		this->yugeInt[i] = yugeInt[i];
 	}
@@ -116,25 +117,18 @@ string HugeInteger::printString(void) {
 		i++;
 	}
 	tempString.resize(arraySize + indexMod);
-
 	do{
-
 		if (!(yugeInt[i] == 0)) { // start printing when non-zero values exist
-
 			for (unsigned int j = i; j < arraySize; j++) {
 				tempString[j - i + indexMod] = intToChar(yugeInt[j]);
 			}
 			if (!signBit) {
 				tempString[0] = '-';
 			}
-
 			break;
 		}
-
 	} while (i++ < arraySize);
-
 	return tempString;
-
 }
 
 unsigned int HugeInteger::sigBitCount(void){
@@ -191,17 +185,11 @@ bool HugeInteger::isLarger(HugeInteger otherInt) {
 }
 
 
-/*
-
 HugeInteger HugeInteger::add(HugeInteger otherHugeInt) {
-	cout << "case ++" << endl;
 
 	unsigned short int tempValues[sizeof(yugeInt) / sizeof(*yugeInt)] = { 0 };
 
-	if (!isLarger(otherHugeInt)) {
-		std::cout << "Arranging logic and stuff" << endl;
-		return otherHugeInt.add(*this); //rearrange variables for logic to work
-	}
+	/*
 	if (!signBit && !otherHugeInt.signBit) { // case (-, -)
 		cout << "addition: entering case -, -!" << endl;
 		return flipBit(flipBit(*this).add(flipBit(otherHugeInt)));
@@ -219,129 +207,72 @@ HugeInteger HugeInteger::add(HugeInteger otherHugeInt) {
 		cout << "addition: entering case -, +!" << endl;
 		return flipBit(subtract(flipBit(*this), otherHugeInt));
 	}
-
-	else {
+	*/
+	//else {
 		// case (+,+)
-		for (int i = (arraySize - 1); i >= 0; i--) {
-			if ((yugeInt[i] + otherHugeInt.yugeInt[i]) > 9) {
-				if (i == 0) {
-					std::cout << "HugeInteger overflow (more than 40 decimal places)" << endl; //don't comment me out
-					abort();
-				}
-				else {
-					tempValues[i] += (yugeInt[i] + otherHugeInt.yugeInt[i] - 10);
-					tempValues[i - 1] = 1;
-				}
+	for (int i = (arraySize - 1); i >= 0; i--) {
+		if ((yugeInt[i] + otherHugeInt.yugeInt[i]) > 9) {
+			if (i == 0) {
+				std::cout << "HugeInteger overflow (more than 40 decimal places)" << endl; //don't comment me out
+				abort();
 			}
 			else {
-				tempValues[i] += yugeInt[i] + otherHugeInt.yugeInt[i];
+				tempValues[i] += (yugeInt[i] + otherHugeInt.yugeInt[i] - 10);
+				tempValues[i - 1] = 1;
 			}
 		}
+		else {
+			tempValues[i] += yugeInt[i] + otherHugeInt.yugeInt[i];
+		}
 	}
-	return HugeInteger(tempValues);
+	return HugeInteger(tempValues, true);
 }
 
-*/
-
-
-/*
-
-
-HugeInteger HugeInteger::add(HugeInteger otherHugeInt) {
-	cout << "case ++" << endl;
-
-	unsigned short int tempValues[sizeof(yugeInt) / sizeof(*yugeInt)] = { 0 };
-
-	if (!isLarger(otherHugeInt)) {
-		std::cout << "Arranging logic and stuff" << endl;
-		return otherHugeInt.add(*this); //rearrange variables for logic to work
+unsigned int HugeInteger::subtract_owedValue(const bool &owedFlag) {
+	if (owedFlag) {
+		return 1;
 	}
-	if (!signBit && !otherHugeInt.signBit) { // case (-, -)
-		cout << "addition: entering case -, -!" << endl;
-		return flipBit(flipBit(*this).add(flipBit(otherHugeInt)));
-	}
-
-	else if (signBit && !otherHugeInt.signBit) { //(case +, -)
-		cout << "addition: entering case +, -!" << endl;
-		print();
-		std::cout << std::endl;
-		flipBit(otherHugeInt).print();
-		return subtract(*this, flipBit(otherHugeInt));
-	}
-
-	else if (!signBit && otherHugeInt.signBit) { //(case -, +)
-		cout << "addition: entering case -, +!" << endl;
-		return flipBit(subtract(flipBit(*this), otherHugeInt));
-	}
-
 	else {
-		// case (+,+)
-		for (int i = (arraySize - 1); i >= 0; i--) {
-			if ((yugeInt[i] + otherHugeInt.yugeInt[i]) > 9) {
-				if (i == 0) {
-					std::cout << "HugeInteger overflow (more than 40 decimal places)" << endl; //don't comment me out
-					abort();
-				}
-				else {
-					tempValues[i] += (yugeInt[i] + otherHugeInt.yugeInt[i] - 10);
-					tempValues[i - 1] = 1;
-				}
-			}
-			else {
-				tempValues[i] += yugeInt[i] + otherHugeInt.yugeInt[i];
-			}
-		}
+		return 0;
 	}
-	return HugeInteger(tempValues);
 }
 
+HugeInteger HugeInteger::subtract(HugeInteger otherInt) {
+	unsigned short tempValues[40] = { 0 };
+	bool areBothNeg{ false };
 
 
-HugeInteger subtract(HugeInteger biggerInt, HugeInteger smallerInt) {
-	unsigned short int* tempValues = new unsigned short[biggerInt.arraySize] {0};
 
-	if (smallerInt.isLarger(biggerInt)) {
-		return subtract(smallerInt, biggerInt); //rearrange variables for logic to work
+	if (otherInt.sigBits > sigBits) {
+		return otherInt.subtract(*this);
+	}
+	else if ((otherInt.sigBits == sigBits) && !signBit) {
+		areBothNeg = true;
+		if (yugeInt[0] + otherInt.yugeInt[0] > 9) {
+			cout << "HugeInteger overflow (subtract)" << endl;
+			abort();
+		}
 	}
 
 	bool owedFlag{ false };
-	int owedPosition = 0;
-
-	for (int i = biggerInt.arraySize - 1; i > biggerInt.arraySize - biggerInt.stringSize - 1; i--) {
-		//cout << "owedFlag = " << owedFlag ? "TRUE" : "FALSE";
-		std::cout << std::endl;
-		//cout << endl;
-		//cout << "owedPosition = " << owedPosition << endl;
-		//cout << "yugeInt[" << i << "] = " << yugeInt[i] << endl;
-
-		if (biggerInt.yugeInt[i] < smallerInt.yugeInt[i] && owedFlag == 0) {
-			owedFlag = 1;
-			owedPosition = i - 1;
-			//cout << "Entering yuge < otherHuge and owedPosition = " << owedPosition << endl;
-			biggerInt.yugeInt[i] += 10;
+	const unsigned int baseTenConstant{ 10 };
+	for (int i = arraySize - 1; i > (arraySize - stringSize - 1); i--) {
+		if (yugeInt[i] < (otherInt.yugeInt[i] + subtract_owedValue(owedFlag))) {
+			tempValues[i] = (yugeInt[i] + baseTenConstant) - otherInt.yugeInt[i] - subtract_owedValue(owedFlag);
+			owedFlag = true;
 		}
-
-		else if (owedFlag == 1 && i == owedPosition) {
-			//cout << "entering owedflag and owed position conditional statement" << endl;
-			if (biggerInt.yugeInt[i] > 0) {
-				//cout << "Entering yugeint[i] > 0" << endl;
-				owedFlag = 0;
-				biggerInt.yugeInt[i] -= 1;
-			}
-			else {
-				//cout << "carrying over..." << endl;
-				biggerInt.yugeInt[i] = 9;
-				owedPosition--;
-			}
-
+		else{
+			tempValues[i] = yugeInt[i] - otherInt.yugeInt[i] - subtract_owedValue(owedFlag);
+			owedFlag = false;
 		}
-		tempValues[i] = biggerInt.yugeInt[i] - smallerInt.yugeInt[i];
-		//cout << "tempValues[" << i << "] =  " << yugeInt[i] << " - " << otherHugeInt.yugeInt[i] << endl;
-		//cout << "end of loop " << i << endl << endl << endl;
 	}
-
 	return HugeInteger(tempValues, true);
-	/*
+}
+
+
+
+/*
+
 	else if (signBit && otherHugeInt.signBit) { // if both numbers are positive
 		bool owedFlag = 0; //determines if we need to carry over a -1 operation to the next pos
 		unsigned int owedPosition = 0; //flag is necessary as the data type of yugeInt is unsigned
@@ -368,11 +299,10 @@ HugeInteger subtract(HugeInteger biggerInt, HugeInteger smallerInt) {
 	else { // case !signBit && otherHugeInt.signBit
 		return flipBit(*this).subtract(otherHugeInt); //adds both values and sticks a minus sign in front
 	}
-	*/
 
 
 
-/*
+
 
 HugeInteger& HugeInteger::setValues(HugeInteger flipMyBit, bool signBit) {
 
@@ -411,6 +341,20 @@ HugeInteger& HugeInteger::setValues(HugeInteger &otherInt) {
 	}
 	return *this;
 }
+	*/
 
 
-*/
+int HugeInteger::getCppInt(void) {
+	int tempInt{ 0 };
+
+	for (int i = arraySize - 1; i >= (arraySize - sigBits); i--) {
+		tempInt += static_cast<int>(this->yugeInt[i])*pow(10, (arraySize-1)-i);
+	}
+	
+	if (signBit) {
+		return tempInt;
+	}
+	else {
+		return -tempInt;
+	}
+}

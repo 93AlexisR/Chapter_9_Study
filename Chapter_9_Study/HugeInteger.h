@@ -10,8 +10,9 @@ public:
 	const unsigned short arraySize{ sizeof(yugeInt) / sizeof(*yugeInt) };
 	bool signBit{ 1 };
 	unsigned int sigBits{ 0 };
-	unsigned int sigBitCount(void); //returns significant bits
 
+	unsigned int sigBitCount(void); //returns significant bits
+	unsigned int subtract_owedValue(const bool &owedFlag);
 
 
 //protected:
@@ -37,7 +38,6 @@ public:
 
 
 	bool isEqual(HugeInteger &otherInt);
-
 	//HugeInteger(const char charList[]);
 
 	//HugeInteger flipBitMethod(void) { return HugeInteger(this->yugeInt, this->signBit);}
@@ -54,7 +54,9 @@ public:
 	string printString(void);
 
 	HugeInteger add(HugeInteger biggerInt);
-	friend HugeInteger subtract(HugeInteger otherHugeInt, HugeInteger smallerInt);
+
+	HugeInteger subtract(HugeInteger biggerInt);
+	int getCppInt(void);
 	//constexpr unsigned int getArraySize(void) { return arraySize; }
 
 	bool isLarger(HugeInteger otherHugeInt);
