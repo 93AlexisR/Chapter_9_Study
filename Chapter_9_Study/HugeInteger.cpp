@@ -95,6 +95,10 @@ HugeInteger::~HugeInteger(){
 
 //////////////////
 
+HugeInteger flipBit(HugeInteger flipMyBit) {
+	return HugeInteger(flipMyBit.yugeInt, !flipMyBit.signBit);
+}
+
 HugeInteger& HugeInteger::copy(HugeInteger otherInt) {
 	this->signBit = otherInt.signBit;
 	this -> sigBits = otherInt.sigBits;
@@ -152,12 +156,25 @@ bool HugeInteger::isEqual(HugeInteger &otherInt) {
 	return true;
 }
 
-bool HugeInteger::isLarger(HugeInteger otherInt) {
 
+HugeInteger HugeInteger::absVal(void) {
+	return HugeInteger(this->yugeInt, true);
+}
+
+bool HugeInteger::isLarger(HugeInteger &otherInt) { //const
+	for (unsigned int i = 0; i < arraySize; i++) {
+		if (yugeInt[i] > otherInt.yugeInt[i]) {
+			return true;
+		}
+	}
+	return false;
+} //returns true if absolute value is bigger
+
+
+bool HugeInteger::isGreater(HugeInteger otherInt) {
 	if (isEqual(otherInt)) {
 		return false;
 	}
-
 	if (signBit != otherInt.signBit) {
 		if (signBit && !otherInt.signBit) {
 			return true;
@@ -166,12 +183,10 @@ bool HugeInteger::isLarger(HugeInteger otherInt) {
 			return false;
 		}
 	}
-
 	bool areBothNeg = false;
 	if (!signBit && !otherInt.signBit) {
 		areBothNeg = true;
 	}
-
 	if ( !areBothNeg && (sigBits < otherInt.sigBits) ) {
 		return false; //rearranging variables for logic purposes
 	}
@@ -181,8 +196,12 @@ bool HugeInteger::isLarger(HugeInteger otherInt) {
 	if (areBothNeg && (sigBits < otherInt.sigBits)) {
 		return true;
 	}
-	return false;
+	return isLarger(otherInt);
 }
+
+
+
+////////////////////////////helper functions above
 
 
 HugeInteger HugeInteger::add(HugeInteger otherHugeInt) {
@@ -195,21 +214,19 @@ HugeInteger HugeInteger::add(HugeInteger otherHugeInt) {
 		return flipBit(flipBit(*this).add(flipBit(otherHugeInt)));
 	}
 
-	else if (signBit && !otherHugeInt.signBit) { //(case +, -)
-		cout << "addition: entering case +, -!" << endl;
-		print();
-		std::cout << std::endl;
-		flipBit(otherHugeInt).print();
-		return subtract(*this, flipBit(otherHugeInt));
-	}
+
 
 	else if (!signBit && otherHugeInt.signBit) { //(case -, +)
 		cout << "addition: entering case -, +!" << endl;
 		return flipBit(subtract(flipBit(*this), otherHugeInt));
 	}
 	*/
-	//else {
-		// case (+,+)
+
+	if (signBit && !otherHugeInt.signBit) { //(case +, -)
+		cout << "addition: entering case +, -!" << endl;
+		HugeInteger tempInteger(otherHugeInt.yugeInt, true);
+		return subtract(tempInteger);
+	}
 	for (int i = (arraySize - 1); i >= 0; i--) {
 		if ((yugeInt[i] + otherHugeInt.yugeInt[i]) > 9) {
 			if (i == 0) {
@@ -242,7 +259,6 @@ HugeInteger HugeInteger::subtract(HugeInteger otherInt) {
 	bool areBothNeg{ false };
 
 
-
 	if (otherInt.sigBits > sigBits) {
 		return otherInt.subtract(*this);
 	}
@@ -254,8 +270,17 @@ HugeInteger HugeInteger::subtract(HugeInteger otherInt) {
 		}
 	}
 
+	//case +,+
+	//logic if the rvalue is larger than the right 
+	if (!isLarger(otherInt)) {
+		cout << "case you just coded works" << endl;
+		HugeInteger tempInt(otherInt.yugeInt, true);
+		return tempInt.subtract(*this);
+	}
+
 	bool owedFlag{ false };
 	const unsigned int baseTenConstant{ 10 };
+
 	for (int i = arraySize - 1; i > (arraySize - stringSize - 1); i--) {
 		if (yugeInt[i] < (otherInt.yugeInt[i] + subtract_owedValue(owedFlag))) {
 			tempValues[i] = (yugeInt[i] + baseTenConstant) - otherInt.yugeInt[i] - subtract_owedValue(owedFlag);

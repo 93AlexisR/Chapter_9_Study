@@ -12,8 +12,10 @@ public:
 	unsigned int sigBits{ 0 };
 
 	unsigned int sigBitCount(void); //returns significant bits
-	unsigned int subtract_owedValue(const bool &owedFlag);
-
+	unsigned int subtract_owedValue(const bool &owedFlag); //helper function for subtraction
+	bool isLarger(HugeInteger &otherInt); //returns true if absolute value is bigger
+	HugeInteger absVal(void); //returns absolute value
+	HugeInteger flipBit(void) { return HugeInteger(yugeInt, !signBit);}
 
 //protected:
 	HugeInteger& copy(HugeInteger otherInt);
@@ -59,7 +61,7 @@ public:
 	int getCppInt(void);
 	//constexpr unsigned int getArraySize(void) { return arraySize; }
 
-	bool isLarger(HugeInteger otherHugeInt);
+	bool isGreater(HugeInteger otherHugeInt);
 	const bool isPos(void);
 
 };
