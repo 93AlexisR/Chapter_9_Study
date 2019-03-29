@@ -9,10 +9,15 @@ using namespace std;
 int main() {
 
 	string myString("-111");
-	string otherString("100");
 	HugeInteger myInt(myString);
-	HugeInteger otherInt(otherString);
-	HugeInteger lastInt(myInt.flipBit());
+	HugeInteger otherInt(myString);
+	//myInt.print();
+	cout << endl;
+	//otherInt.print();
+	cout << endl;
+	HugeInteger lastInt;
+	lastInt.copy(myInt);
+	cout << endl;
 	lastInt.print();
 	return 0;			
 }

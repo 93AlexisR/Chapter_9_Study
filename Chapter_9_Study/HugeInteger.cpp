@@ -3,6 +3,7 @@
 using namespace std;
 
 HugeInteger::HugeInteger(unsigned short int newArray[], bool signBit) {
+
 	this->signBit = signBit;
 	for (unsigned int i = 0; i < arraySize; i++) {
 		this->yugeInt[i] = newArray[i];
@@ -10,55 +11,8 @@ HugeInteger::HugeInteger(unsigned short int newArray[], bool signBit) {
 	sigBits = sigBitCount();
 }
 
-/*HugeInteger::HugeInteger(const char charList[]) { // TODO
-	stringSize = sizeof(charList);
-	cout << stringSize;
-	for (unsigned int i = 0; i < stringSize; i++) {
-		if (&charList[i] == nullptr) {
-			cout << "[" << i << "] " << charList[i] << endl;
-		}
-	}
-	cout << "stringSize = " << stringSize << endl;
-	string newString;
-	newString.resize(stringSize);
-	cout << newString.size() << endl;
-	{
-		unsigned int i = 0;
-		for (auto v : newString) {
-			newString[v] = charList[i];
-			i++;
-		}
-	}
-
-	if (stringSize > (arraySize + 1)) {
-		cout << "Class HugeInteger can only hold" << arraySize << " digit." << endl;
-		abort();
-	}
-
-	if (charList[0] == '-') {
-		this->signBit = false;
-		yugeInt[0] = '0';
-	}
-
-
-	for (unsigned int i = 0; i < arraySize-1; i++) {
-		std::cout << i << std::endl;
-
-		if (i < (arraySize - stringSize)) { // initialize to 0 until non-zero value is expected
-			yugeInt[i] = 0;
-		}
-		else {
-			
-			yugeInt[i] = charToInt(newString[i - (arraySize - stringSize)]);
-			cout << yugeInt[i];
-		}
-	}
-
-	cout << endl;
-}
-*/
-
 HugeInteger::HugeInteger(string& charVal) {
+	string tempString = charVal;
 	stringSize = charVal.size();
 	unsigned int i = 0;
 
@@ -83,9 +37,14 @@ HugeInteger::HugeInteger(string& charVal) {
 	} while (++i < arraySize);
 
 	sigBits = sigBitCount();
+
+	if (!signBit) {
+		charVal = tempString;
+	}
 }
 
 HugeInteger::HugeInteger(void) {
+	isEmpty = true;
 	//values already initialized in header
 }
 
@@ -99,17 +58,20 @@ HugeInteger flipBit(HugeInteger flipMyBit) {
 	return HugeInteger(flipMyBit.yugeInt, !flipMyBit.signBit);
 }
 
-HugeInteger& HugeInteger::copy(HugeInteger otherInt) {
+void HugeInteger::copy(HugeInteger otherInt) {
 	this->signBit = otherInt.signBit;
-	this -> sigBits = otherInt.sigBits;
+	this->sigBits = otherInt.sigBits;
+	std::copy(otherInt.yugeInt, otherInt.yugeInt + arraySize, yugeInt);
 	for (unsigned int i = 0; i < arraySize; i++) {
-		this->yugeInt[i] = yugeInt[i];
+		//cout << yugeInt[i];
 	}
-	return *this;
-}
+	cout << endl;
+}	
 
 void HugeInteger::print(void) {
-	cout << printString();
+	for (unsigned int i = 0; i < arraySize; i++) {
+		//cout << yugeInt[i];
+	}
 }
 
 string HugeInteger::printString(void) {
@@ -131,7 +93,17 @@ string HugeInteger::printString(void) {
 			}
 			break;
 		}
+		if (i == arraySize) {
+			isEmpty = true;
+		}
 	} while (i++ < arraySize);
+	if (isEmpty) {
+		tempString.resize(1);
+		tempString[0] = '0';
+	}
+	cout << "exiting printString" << endl;
+	cout << tempString;
+	cout << endl;
 	return tempString;
 }
 
@@ -188,7 +160,7 @@ bool HugeInteger::isGreater(HugeInteger otherInt) {
 		areBothNeg = true;
 	}
 	if ( !areBothNeg && (sigBits < otherInt.sigBits) ) {
-		return false; //rearranging variables for logic purposes
+		return false; 
 	}
 	else {
 		return true;
@@ -198,48 +170,39 @@ bool HugeInteger::isGreater(HugeInteger otherInt) {
 	}
 	return isLarger(otherInt);
 }
-
-
-
 ////////////////////////////helper functions above
 
 
 HugeInteger HugeInteger::add(HugeInteger otherHugeInt) {
-
 	unsigned short int tempValues[sizeof(yugeInt) / sizeof(*yugeInt)] = { 0 };
-
-	/*
-	if (!signBit && !otherHugeInt.signBit) { // case (-, -)
-		cout << "addition: entering case -, -!" << endl;
-		return flipBit(flipBit(*this).add(flipBit(otherHugeInt)));
-	}
-
-
-
-	else if (!signBit && otherHugeInt.signBit) { //(case -, +)
-		cout << "addition: entering case -, +!" << endl;
-		return flipBit(subtract(flipBit(*this), otherHugeInt));
-	}
-	*/
-
 	if (signBit && !otherHugeInt.signBit) { //(case +, -)
 		cout << "addition: entering case +, -!" << endl;
 		HugeInteger tempInteger(otherHugeInt.yugeInt, true);
-		return subtract(tempInteger);
+		return subtract(tempInteger); //*this.subtract(otherInt);
 	}
-	for (int i = (arraySize - 1); i >= 0; i--) {
-		if ((yugeInt[i] + otherHugeInt.yugeInt[i]) > 9) {
-			if (i == 0) {
-				std::cout << "HugeInteger overflow (more than 40 decimal places)" << endl; //don't comment me out
-				abort();
+	else if (!signBit && !otherHugeInt.signBit) {//case (-,-)
+		HugeInteger tempInts[3] = { flipBit(), otherHugeInt.flipBit() };
+		flipBit(); 
+		otherHugeInt.flipBit();
+		tempInts[2].copy(tempInts[0].add(tempInts[1]));
+		//tempInts[1].print();
+		return tempInts[1];
+	}
+	else {
+		for (int i = (arraySize - 1); i >= 0; i--) {
+			if ((yugeInt[i] + otherHugeInt.yugeInt[i]) > 9) {
+				if (i == 0) {
+					std::cout << "HugeInteger overflow (more than 40 decimal places)" << endl; //don't comment me out
+					abort();
+				}
+				else {
+					tempValues[i] += (yugeInt[i] + otherHugeInt.yugeInt[i] - 10);
+					tempValues[i - 1] = 1;
+				}
 			}
 			else {
-				tempValues[i] += (yugeInt[i] + otherHugeInt.yugeInt[i] - 10);
-				tempValues[i - 1] = 1;
+				tempValues[i] += yugeInt[i] + otherHugeInt.yugeInt[i];
 			}
-		}
-		else {
-			tempValues[i] += yugeInt[i] + otherHugeInt.yugeInt[i];
 		}
 	}
 	return HugeInteger(tempValues, true);
@@ -257,38 +220,29 @@ unsigned int HugeInteger::subtract_owedValue(const bool &owedFlag) {
 HugeInteger HugeInteger::subtract(HugeInteger otherInt) {
 	unsigned short tempValues[40] = { 0 };
 	bool areBothNeg{ false };
-
-
-	if (otherInt.sigBits > sigBits) {
-		return otherInt.subtract(*this);
-	}
-	else if ((otherInt.sigBits == sigBits) && !signBit) {
-		areBothNeg = true;
+	if (!signBit && !otherInt.signBit) {
 		if (yugeInt[0] + otherInt.yugeInt[0] > 9) {
 			cout << "HugeInteger overflow (subtract)" << endl;
 			abort();
 		}
 	}
-
-	//case +,+
-	//logic if the rvalue is larger than the right 
-	if (!isLarger(otherInt)) {
-		cout << "case you just coded works" << endl;
-		HugeInteger tempInt(otherInt.yugeInt, true);
-		return tempInt.subtract(*this);
+	if (!signBit) { // (case -, +)
+		HugeInteger tempInt(flipBit());
+		HugeInteger otherTempInt((tempInt.add(otherInt)).flipBit());
+		return otherTempInt;
 	}
-
-	bool owedFlag{ false };
-	const unsigned int baseTenConstant{ 10 };
-
-	for (int i = arraySize - 1; i > (arraySize - stringSize - 1); i--) {
-		if (yugeInt[i] < (otherInt.yugeInt[i] + subtract_owedValue(owedFlag))) {
-			tempValues[i] = (yugeInt[i] + baseTenConstant) - otherInt.yugeInt[i] - subtract_owedValue(owedFlag);
-			owedFlag = true;
-		}
-		else{
-			tempValues[i] = yugeInt[i] - otherInt.yugeInt[i] - subtract_owedValue(owedFlag);
-			owedFlag = false;
+	else { // (case +,+)
+		bool owedFlag{ false };
+		const unsigned int baseTenConstant{ 10 };
+		for (int i = arraySize - 1; i > (arraySize - stringSize - 1); i--) {
+			if (yugeInt[i] < (otherInt.yugeInt[i] + subtract_owedValue(owedFlag))) {
+				tempValues[i] = (yugeInt[i] + baseTenConstant) - otherInt.yugeInt[i] - subtract_owedValue(owedFlag);
+				owedFlag = true;
+			}
+			else {
+				tempValues[i] = yugeInt[i] - otherInt.yugeInt[i] - subtract_owedValue(owedFlag);
+				owedFlag = false;
+			}
 		}
 	}
 	return HugeInteger(tempValues, true);
