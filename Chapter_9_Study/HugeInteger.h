@@ -16,7 +16,7 @@ public:
 	unsigned int subtract_owedValue(const bool &owedFlag); //helper function for subtraction
 	bool isLarger(HugeInteger &otherInt); //returns true if absolute value is bigger
 	HugeInteger absVal(void); //returns absolute value
-	HugeInteger flipBit(void) { return HugeInteger(yugeInt, !signBit);}
+	HugeInteger tempFlipBit(void) { return HugeInteger(yugeInt, !signBit);}
 
 //protected:
 	void copy(HugeInteger otherInt);
@@ -34,7 +34,7 @@ public:
 	HugeInteger subtract(HugeInteger biggerInt);
 
 	int getCppInt(void);
-	friend HugeInteger flipBit(HugeInteger flipMyBit);
+	HugeInteger& flipBit(void);
 
 	bool isGreater(HugeInteger otherHugeInt);
 	bool isEqual(HugeInteger &otherInt);

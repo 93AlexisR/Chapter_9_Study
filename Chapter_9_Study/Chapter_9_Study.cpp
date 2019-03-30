@@ -8,17 +8,13 @@ using namespace std;
 
 int main() {
 
-	string myString("-111");
+	string myString("-5665");
+	string otherString("14345611");
 	HugeInteger myInt(myString);
-	HugeInteger otherInt(myString);
-	//myInt.print();
-	cout << endl;
-	//otherInt.print();
-	cout << endl;
-	HugeInteger lastInt;
-	lastInt.copy(myInt);
-	cout << endl;
-	lastInt.print();
+	HugeInteger otherInt(otherString);
+	HugeInteger tempInt;
+	tempInt.copy(myInt.subtract(otherInt));
+	tempInt.print();
 	return 0;			
 }
 
