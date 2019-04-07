@@ -6,17 +6,13 @@
 
 int main() {
 
-	std::string myString("100");
-	std::string otherString("5");
+	std::string myString("80");
+	std::string otherString("25");
 	myInteger::HugeInteger myInt(myString);
 	myInteger::HugeInteger otherInt(otherString);
 	myInteger::HugeInteger tempInt;
-	tempInt.copy(myInt.multiply(otherInt));
-
-	for (unsigned int i = 0; i < 102; i++) {
-		myInt.minusOne();
-		cout << myInt.printString() << endl;
-	}
+	tempInt.copy(myInt.modulo(otherInt));
+	tempInt.print();
 
 
 

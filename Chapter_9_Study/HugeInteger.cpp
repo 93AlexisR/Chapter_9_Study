@@ -142,6 +142,10 @@ HugeInteger HugeInteger::absVal(void) {
 
 HugeInteger& HugeInteger::minusOne(void){ //will not work with edge cases, rebuild later
 	bool owedFlag = true;
+	isEmpty();
+	if (isEmptyVar) {
+		return *this; //value is 0;
+	}
 	if (signBit){
 		if (yugeInt[arraySize - 1] > 0) {
 			yugeInt[arraySize - 1] -= 1;
@@ -356,18 +360,80 @@ HugeInteger HugeInteger::subtract(HugeInteger otherInt) {
 }
 
 HugeInteger HugeInteger::multiply(HugeInteger otherInt){
-	if (otherInt.isEmpty()) {
+	if (otherInt.isEmpty() || isEmpty()) {
 		return HugeInteger(); //return 0;
 	}
+	if (!isLarger(otherInt)) {
+		return otherInt.multiply(*this);
+	}
 	HugeInteger tempInt;
-	HugeInteger myIndex(otherInt);
-	HugeInteger addVal(*this);
-	for (int i = getCppInt(); i > 0; i--) {
-		tempInt.copy(add(addVal));
-
+	HugeInteger myIndex(otherInt); //using other int as an index to add multiple tiimes
+	if (!signBit) {
+		if (otherInt.signBit) {//case -,+
+			flipBit();
+			tempInt.copy(multiply(otherInt));
+			tempInt.flipBit(); flipBit();
+		}
+		else {//case --
+			flipBit(); otherInt.flipBit();
+			tempInt.copy(multiply(otherInt));
+			flipBit(); otherInt.flipBit(); 
+		}
+	}
+	else {
+		if (!otherInt.signBit) {//case +,-
+			otherInt.flipBit();
+			tempInt.copy(multiply(otherInt));
+			tempInt.flipBit(); otherInt.flipBit();
+		}
+		else { //case ++
+			do {
+				tempInt.copy(tempInt.add(*this));
+				myIndex.minusOne();
+			} while (!myIndex.isEmptyVar);
+		}
 	}
 	return tempInt;
 }
+
+HugeInteger HugeInteger::modulo(HugeInteger otherInt) {
+	if (otherInt.isEmpty() || isEmpty()) {
+		return HugeInteger(); //return 0;
+	}
+	if (!isLarger(otherInt)) {
+		return otherInt.multiply(*this);
+	}
+	HugeInteger tempInt(*this);
+	HugeInteger myIndex; 
+	if (!signBit) {
+		if (otherInt.signBit) {//case -,+
+			flipBit();
+			tempInt.copy(multiply(otherInt));
+			tempInt.flipBit(); flipBit();
+		}
+		else {//case --
+			flipBit(); otherInt.flipBit();
+			tempInt.copy(multiply(otherInt));
+			flipBit(); otherInt.flipBit();
+		}
+	}
+	else {
+		if (!otherInt.signBit) {//case +,-
+			otherInt.flipBit();
+			tempInt.copy(multiply(otherInt));
+			tempInt.flipBit(); otherInt.flipBit();
+		}
+		else { //case ++
+			do {
+				cout << "tempInt = " << tempInt.printString() << endl;
+				tempInt.copy(tempInt.subtract(otherInt));
+				//myIndex.plusOne(); //stores division value, useful later
+			} while (tempInt.isGreater(otherInt));
+		}
+	}
+	return tempInt;
+}
+
 
 int HugeInteger::getCppInt(void) {
 	int tempInt{ 0 };

@@ -38,6 +38,7 @@ namespace myInteger {
 		HugeInteger add(HugeInteger biggerInt);
 		HugeInteger subtract(HugeInteger biggerInt);
 		HugeInteger multiply(HugeInteger otherInt);
+		HugeInteger modulo(HugeInteger otherInt);
 
 		int getCppInt(void);
 		HugeInteger& flipBit(void);
