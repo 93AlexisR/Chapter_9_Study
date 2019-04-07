@@ -1,20 +1,25 @@
 // chapter_9_study.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 #include "pch.h"
-using namespace std;
-
 
 
 
 int main() {
 
-	string myString("-5665");
-	string otherString("14345611");
-	HugeInteger myInt(myString);
-	HugeInteger otherInt(otherString);
-	HugeInteger tempInt;
-	tempInt.copy(myInt.subtract(otherInt));
-	tempInt.print();
+	std::string myString("100");
+	std::string otherString("5");
+	myInteger::HugeInteger myInt(myString);
+	myInteger::HugeInteger otherInt(otherString);
+	myInteger::HugeInteger tempInt;
+	tempInt.copy(myInt.multiply(otherInt));
+
+	for (unsigned int i = 0; i < 102; i++) {
+		myInt.minusOne();
+		cout << myInt.printString() << endl;
+	}
+
+
+
 	return 0;			
 }
 

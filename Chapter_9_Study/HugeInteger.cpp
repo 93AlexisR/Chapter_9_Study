@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "HugeInteger.h"
-using namespace std;
+using namespace myInteger;
 
 HugeInteger::HugeInteger(unsigned short int newArray[], bool signBit) {
 	this->signBit = signBit;
@@ -43,7 +43,7 @@ HugeInteger::HugeInteger(string& charVal) {
 }
 
 HugeInteger::HugeInteger(void) {
-	isEmpty = true;
+	isEmptyVar = true;
 	//values already initialized in header
 }
 
@@ -53,6 +53,17 @@ HugeInteger::~HugeInteger(){
 
 //////////////////
 
+bool HugeInteger::isEmpty(void) {
+	for (unsigned int i = 0; i < arraySize; i++) {
+		if (yugeInt[i] != 0) {
+			isEmptyVar = false;
+			return isEmptyVar;
+		}
+	}
+	isEmptyVar = true;
+	return isEmptyVar;
+}
+
 HugeInteger& HugeInteger::flipBit(void) {
 	this->signBit = !(this->signBit);
 	return *this;
@@ -61,7 +72,7 @@ HugeInteger& HugeInteger::flipBit(void) {
 void HugeInteger::copy(HugeInteger otherInt) {
 	this->signBit = otherInt.signBit;
 	this->sigBits = otherInt.sigBits;
-	this->isEmpty = otherInt.isEmpty;
+	this->isEmptyVar = otherInt.isEmptyVar;
 	for (unsigned int i = 0; i < arraySize; i++) {
 		yugeInt[i] = otherInt.yugeInt[i];
 	}
@@ -91,10 +102,10 @@ string HugeInteger::printString(void) {
 			break;
 		}
 		if (i == arraySize) {
-			isEmpty = true;
+			isEmptyVar = true;
 		}
 	} while (i++ < arraySize);
-	if (isEmpty) {
+	if (isEmptyVar) {
 		tempString.resize(1);
 		tempString[0] = '0';
 	}
@@ -128,6 +139,50 @@ bool HugeInteger::isEqual(HugeInteger &otherInt) {
 HugeInteger HugeInteger::absVal(void) {
 	return HugeInteger(this->yugeInt, true);
 }
+
+HugeInteger& HugeInteger::minusOne(void){ //will not work with edge cases, rebuild later
+	bool owedFlag = true;
+	if (signBit){
+		if (yugeInt[arraySize - 1] > 0) {
+			yugeInt[arraySize - 1] -= 1;
+			isEmpty();
+			return *this;
+		}
+		else{
+			yugeInt[arraySize - 1] = 9;
+			owedFlag = true;
+			for (int i = (arraySize - 2); i > (arraySize - stringSize - 1); i--) {
+				if (owedFlag == true) {
+					if (yugeInt[i] < 1) {
+						yugeInt[i] = 9;
+					}
+					else {
+						yugeInt[i] -= 1;
+						owedFlag = false;
+					}
+				}
+			}
+		}
+	} 
+	else {
+		cout << "not yet coded lol" << endl;
+		return *this;
+	}	
+	isEmpty();
+	if (isEmptyVar) {
+		cout << "oh noes, 0!" << endl;
+	}
+	return *this;
+}
+
+HugeInteger& HugeInteger::plusOne(void) { //will not work with edge cases, rebuild later
+	unsigned short tempArray[40] = { 0 };
+	tempArray[39] = 1;
+	HugeInteger tempInt(tempArray, true); // basically "int tempInt = 1;"
+	copy(add(tempInt));
+	return *this;
+}
+
 
 bool HugeInteger::isLarger(HugeInteger &otherInt) { //const
 	for (unsigned int i = 0; i < arraySize; i++) {
@@ -173,8 +228,17 @@ HugeInteger HugeInteger::add(HugeInteger otherInt) {
 	unsigned short int tempValues[sizeof(yugeInt) / sizeof(*yugeInt)] = { 0 };
 	if (signBit) {
 		if (!otherInt.signBit) { //(case +, -)
-			HugeInteger tempInteger(otherInt.yugeInt, true);
-			return subtract(tempInteger); //*this.subtract(otherInt);
+			if (otherInt.isLarger(*this)) { //if value thats neg is larger
+				HugeInteger tempInteger;
+				otherInt.flipBit();
+				tempInteger.copy(otherInt.subtract(*this));
+				otherInt.flipBit(); tempInteger.flipBit();
+				return tempInteger; //return -(abs(b) - abs(a))
+			}
+			else {
+				HugeInteger tempInteger(otherInt.yugeInt, true);
+				return subtract(tempInteger); //*this.subtract(abs(otherInt));
+			}
 		}
 		else { //case +,+
 			if ((yugeInt[0] + otherInt.yugeInt[0]) > 9) {
@@ -195,7 +259,19 @@ HugeInteger HugeInteger::add(HugeInteger otherInt) {
 	}
 	else if (!signBit) {
 		if (otherInt.signBit) { // case -, +
-			return otherInt.subtract(*this);
+			if (isLarger(otherInt)) {
+				flipBit(); 
+				HugeInteger tempInt(subtract(otherInt));
+				flipBit(); tempInt.flipBit();
+				return tempInt; // return -(abs(a) - abs(b))
+			}
+			else {
+				HugeInteger tempInt;
+				flipBit();
+				tempInt.copy(otherInt.subtract(*this)); //return b - a
+				flipBit();
+				return tempInt;
+			}
 		}
 		else { //case -, -
 			flipBit(); otherInt.flipBit(); //pretend we're adding two pos nums and return neg
@@ -219,6 +295,7 @@ unsigned int HugeInteger::subtract_owedValue(const bool &owedFlag) {
 }
 
 HugeInteger HugeInteger::subtract(HugeInteger otherInt) {
+
 	unsigned short tempValues[40] = { 0 };
 	bool owedFlag{ false };
 	const unsigned int baseTenConstant{ 10 };
@@ -229,14 +306,14 @@ HugeInteger HugeInteger::subtract(HugeInteger otherInt) {
 		}
 	}
 	if (signBit) {
-		if (!otherInt.signBit) {// case (+,-)
+		if (!otherInt.signBit) {// case (+,-) or +,-(+)
 			HugeInteger tempInt;
 			otherInt.flipBit();
 			tempInt.copy(add(otherInt));
 			otherInt.flipBit();
 			return tempInt;
 		}
-		else { //case +,+
+		else { //case +,+ or +,-(+)
 			if (otherInt.isGreater(*this)) {
 				return otherInt.subtract(*this).flipBit(); //goals
 			}
@@ -257,7 +334,7 @@ HugeInteger HugeInteger::subtract(HugeInteger otherInt) {
 		}
 	}
 	if (!signBit) {
-		if (otherInt.signBit) { // case -, +
+		if (otherInt.signBit) { // case -, 
 			HugeInteger tempInt;
 			flipBit();
 			tempInt.copy(add(otherInt)); //
@@ -265,21 +342,12 @@ HugeInteger HugeInteger::subtract(HugeInteger otherInt) {
 			return tempInt;
 		}
 		else { // case -,-
-			for (int i = arraySize - 1; i > (arraySize - stringSize - 1); i--) {
-				if (otherInt.yugeInt[i] < (yugeInt[i] + subtract_owedValue(owedFlag))) {
-					tempValues[i] += (otherInt.yugeInt[i] + baseTenConstant) - (yugeInt[i] - subtract_owedValue(owedFlag));
-					owedFlag = true;
-				}
-				else {
-					tempValues[i] += otherInt.yugeInt[i] - (otherInt.yugeInt[i] + subtract_owedValue(owedFlag));
-					owedFlag = false;
-				}
-			}
-			flipBit();
-			if ((otherInt.absVal()).isLarger(*this)) {
-				flipBit();
-			}
-			return HugeInteger(tempValues, true);
+			HugeInteger tempInteger;
+			otherInt.flipBit();
+			tempInteger.copy(otherInt.add(*this));
+			otherInt.flipBit();
+			tempInteger.flipBit();
+			return tempInteger;
 		}
 	}
 	else {
@@ -287,7 +355,19 @@ HugeInteger HugeInteger::subtract(HugeInteger otherInt) {
 	}
 }
 
+HugeInteger HugeInteger::multiply(HugeInteger otherInt){
+	if (otherInt.isEmpty()) {
+		return HugeInteger(); //return 0;
+	}
+	HugeInteger tempInt;
+	HugeInteger myIndex(otherInt);
+	HugeInteger addVal(*this);
+	for (int i = getCppInt(); i > 0; i--) {
+		tempInt.copy(add(addVal));
 
+	}
+	return tempInt;
+}
 
 int HugeInteger::getCppInt(void) {
 	int tempInt{ 0 };
@@ -301,3 +381,4 @@ int HugeInteger::getCppInt(void) {
 		return -tempInt;
 	}
 }
+

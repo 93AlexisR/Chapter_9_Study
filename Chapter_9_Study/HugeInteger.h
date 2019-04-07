@@ -1,42 +1,49 @@
 #pragma once
 //Exercice 9.12 or something
 using namespace std;
-class HugeInteger{
-public:
 
-//private:
-	unsigned int stringSize{ 0 };
-	short unsigned int yugeInt[40] = { 0 };
-	const unsigned short arraySize{ sizeof(yugeInt) / sizeof(*yugeInt) };
-	bool signBit{ 1 }; 
-	bool isEmpty{ false }; //print function param
-	unsigned int sigBits{ 0 };
+namespace myInteger {
+	class HugeInteger {
+	public:
 
-	unsigned int sigBitCount(void); //returns significant bits
-	unsigned int subtract_owedValue(const bool &owedFlag); //helper function for subtraction
-	bool isLarger(HugeInteger &otherInt); //returns true if absolute value is bigger
-	HugeInteger absVal(void); //returns absolute value
-	HugeInteger tempFlipBit(void) { return HugeInteger(yugeInt, !signBit);}
+		//private:
+		unsigned int stringSize{ 0 };
+		short unsigned int yugeInt[40] = { 0 };
+		const unsigned short arraySize{ sizeof(yugeInt) / sizeof(*yugeInt) };
+		bool signBit{ 1 };
+		bool isEmptyVar{ false }; //print function param
+		bool isEmpty(void);
+		unsigned int sigBits{ 0 };
 
-//protected:
-	void copy(HugeInteger otherInt);
-	HugeInteger(unsigned short int newArray[], bool newSignBit);
+		unsigned int sigBitCount(void); //returns significant bits
+		unsigned int subtract_owedValue(const bool &owedFlag); //helper function for subtraction
+		bool isLarger(HugeInteger &otherInt); //returns true if absolute value is bigger
+		HugeInteger absVal(void); //returns absolute value
+		HugeInteger tempFlipBit(void) { return HugeInteger(yugeInt, !signBit); }
+		HugeInteger& minusOne(void);
+		HugeInteger& plusOne(void);
 
-//public:
-	HugeInteger(string& myVal);
-	HugeInteger(void);
-	~HugeInteger();
+		//protected:
+		void copy(HugeInteger otherInt);
+		HugeInteger(unsigned short int newArray[], bool newSignBit);
 
-	void print(void);
-	string printString(void);
+		//public:
+		HugeInteger(string& myVal);
+		HugeInteger(void);
+		~HugeInteger();
 
-	HugeInteger add(HugeInteger biggerInt);
-	HugeInteger subtract(HugeInteger biggerInt);
+		void print(void);
+		string printString(void);
 
-	int getCppInt(void);
-	HugeInteger& flipBit(void);
+		HugeInteger add(HugeInteger biggerInt);
+		HugeInteger subtract(HugeInteger biggerInt);
+		HugeInteger multiply(HugeInteger otherInt);
 
-	bool isGreater(HugeInteger otherHugeInt);
-	bool isEqual(HugeInteger &otherInt);
+		int getCppInt(void);
+		HugeInteger& flipBit(void);
 
-};
+		bool isGreater(HugeInteger otherHugeInt);
+		bool isEqual(HugeInteger &otherInt);
+
+	};
+}
