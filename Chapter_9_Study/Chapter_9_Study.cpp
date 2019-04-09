@@ -6,15 +6,6 @@
 
 int main() {
 
-	std::string myString("80");
-	std::string otherString("25");
-	myInteger::HugeInteger myInt(myString);
-	myInteger::HugeInteger otherInt(otherString);
-	myInteger::HugeInteger tempInt;
-	tempInt.copy(myInt.modulo(otherInt));
-	tempInt.print();
-
-
 
 	return 0;			
 }
