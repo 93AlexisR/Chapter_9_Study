@@ -1,16 +1,4 @@
-These are notes for chapter 10 of Deitel's How to Program C++
-
-Operator overloading is pretty self-explenatory; no need to study this part of Ch. 10
-______________________
-Dynamic memory allocation - 10.9
-Control allocation and deallocation of memory in a program 
-the heap is a region of memory assigned to each program for storing objects dynamically allocated at execution time
-The new operator allocates storage of the proper size for an object
-To destroy a dynamically allocated object use the delete operator
+These are notes for chapter 11 of Deitel's How to Program C++
 
 
-
-10.13 - explicit Constructors and Conversion operators 
-
-Explicit is a keyword that can be called with one argument only. 
 
