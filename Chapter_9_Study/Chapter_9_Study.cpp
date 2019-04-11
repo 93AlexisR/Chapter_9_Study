@@ -5,8 +5,32 @@
 
 
 int main() {
-	myEmployees::CommissionEmployee myEmployee[40];
-	cout << myEmployees::Employee::count << endl;
+	myEmployees::CommissionEmployee myEmployee(
+		"John",
+		"Smith",
+		5.0,
+		40.0,
+		2500.0,
+		0.125
+	);
+	myEmployees::Employee* baseClassPtr{ &myEmployee };
+	cout << baseClassPtr->getTotalPay() << endl; //base method
+	cout << myEmployee.getTotalPay() << endl; //new method
+	//the above is the bread & butter of polymorphism 
+	cout << "Locomotives start here" << endl;
+	MyLocomotives::Locomotive myLoco(
+		1.0,
+		1.0,
+		1.0,
+		5.0,
+		360.0
+	);
+	myLoco.move();
+	cout << myLoco.getCurrentSpeed() << endl;
+
+
+
+
 	return 0;			
 }
 

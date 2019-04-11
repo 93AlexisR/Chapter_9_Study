@@ -49,8 +49,8 @@ Employee& Employee::setHourlyRate(const double hourlyRate) {
 }
 
 Employee& Employee::setWeeklyHours(const double weeklyHours) {
-	if (hourlyRate > 0) {
-		this->hourlyRate = hourlyRate;
+	if (weeklyHours > 0) {
+		this->weeklyHours = weeklyHours;
 	}
 	else {
 		cout << "crash: Employee& Employee::setWeeklyHours(const double weeklyHours)" << endl;

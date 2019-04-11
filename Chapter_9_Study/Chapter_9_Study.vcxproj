@@ -154,6 +154,7 @@
     <ClInclude Include="Account.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="HugeInteger.h" />
+    <ClInclude Include="Locomotive.h" />
     <ClInclude Include="myLib.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RandEngine.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="HugeInteger.cpp" />
+    <ClCompile Include="Locomotive.cpp" />
     <ClCompile Include="myLib.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

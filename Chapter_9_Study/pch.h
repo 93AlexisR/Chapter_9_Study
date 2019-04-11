@@ -14,4 +14,10 @@
 #include "Time.h"
 #include <Windows.h>
 #include "HugeInteger.h"
+
+namespace MyLocomotives {
+#include "Locomotive.h"
+}
+
 #endif //PCH_H
+
