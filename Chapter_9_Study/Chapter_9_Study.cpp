@@ -5,8 +5,8 @@
 
 
 int main() {
-
-
+	myEmployees::CommissionEmployee myEmployee[40];
+	cout << myEmployees::Employee::count << endl;
 	return 0;			
 }
 

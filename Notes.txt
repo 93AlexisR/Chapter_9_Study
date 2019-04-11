@@ -1,4 +1,37 @@
 These are notes for chapter 11 of Deitel's How to Program C++
 
 
+Inheritance allows one to create a class that absorbs and existing class' qualities.
+By inheriting from proven software one may tailor it to function in a way to fits our 
+needs. 
+
+The derived class is also an object of the base class (but not vice-versa)
+
+For example. A car is a vehicle, but a vehicle is not necessarily a car. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

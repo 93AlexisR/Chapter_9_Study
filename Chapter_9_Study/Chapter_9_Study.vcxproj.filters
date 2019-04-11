@@ -16,25 +16,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Employee.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HugeInteger.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="myLib.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RandEngine.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandEngine.h">
+      <Filter>Source Files\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -65,10 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Notes.txt">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Resource Files</Filter>
     </Text>
     <Text Include="..\TODO.txt">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Resource Files</Filter>
     </Text>
   </ItemGroup>
 </Project>
