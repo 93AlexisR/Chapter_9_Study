@@ -33,8 +33,8 @@ public:
 	unsigned int getTick(void) { return timeTick; }
 
 	
-	Locomotive& move(void);
-	Locomotive& reset(void) { timeTick = 0; setAcceleration(0).setCurrentSpeed(0).setDistance(0); }
+	virtual Locomotive& move(void);
+	virtual Locomotive& reset(void);
 
 protected:
 	Locomotive& setLength(double);

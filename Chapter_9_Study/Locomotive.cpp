@@ -140,3 +140,11 @@ MyLocomotives::Locomotive& MyLocomotives::Locomotive::move(void)
 	setDistance(getDistance() + getCurrentSpeed());
 	return *this;
 }
+
+MyLocomotives::Locomotive& MyLocomotives::Locomotive::reset(void)
+{
+	timeTick = 0; 
+	setAcceleration(0).setCurrentSpeed(0).setDistance(0); 
+	return *this;
+}
+

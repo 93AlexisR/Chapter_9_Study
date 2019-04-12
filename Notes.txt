@@ -49,6 +49,15 @@ A 'virtual' function allows the type of the object, not the type of the handle u
 to invoke the object's member function, to determine which version of  a virtual 
 funtion to invoke 
 
+a function may be declared virtual by using the word virtual in front of the definition
+
+A function declared virtual at the top level of a hierarchy will pass the virtual
+property if there is a derived class
+
+When coding with polymorphic behavior; create a general class and create new classes 
+to add features that use the base class's virtual functions or overload them when 
+necessary
+
 
 
 

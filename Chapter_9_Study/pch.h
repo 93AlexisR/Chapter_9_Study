@@ -17,6 +17,7 @@
 
 namespace MyLocomotives {
 #include "Locomotive.h"
+#include "LocomotiveWithDrag.hpp"
 }
 
 #endif //PCH_H

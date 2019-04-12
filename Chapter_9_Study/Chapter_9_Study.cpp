@@ -5,7 +5,7 @@
 
 
 int main() {
-	myEmployees::CommissionEmployee myEmployee(
+	/*	myEmployees::CommissionEmployee myEmployee(
 		"John",
 		"Smith",
 		5.0,
@@ -17,7 +17,8 @@ int main() {
 	cout << baseClassPtr->getTotalPay() << endl; //base method
 	cout << myEmployee.getTotalPay() << endl; //new method
 	//the above is the bread & butter of polymorphism 
-	cout << "Locomotives start here" << endl;
+*/
+
 	MyLocomotives::Locomotive myLoco(
 		1.0,
 		1.0,
@@ -25,8 +26,11 @@ int main() {
 		5.0,
 		360.0
 	);
-	myLoco.move();
-	cout << myLoco.getCurrentSpeed() << endl;
+	for (unsigned int i = 0; i < 100; i++) {
+		myLoco.move();
+		cout << myLoco.getCurrentSpeed() << endl;
+	}
+	myLoco.reset();
 
 
 
