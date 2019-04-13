@@ -28,10 +28,10 @@ public:
 	);
 	LocomotiveWithDrag(double acceleration, double maxSpeed, double dragCoefficient, double mediumDensity);
 	LocomotiveWithDrag(void);
-	virtual ~LocomotiveWithDrag();
+	virtual ~LocomotiveWithDrag() override;
 
 
-	virtual LocomotiveWithDrag& move(void);
+	virtual LocomotiveWithDrag& move(void) override;
 
 
 	LocomotiveWithDrag& setDragCoefficient(double);

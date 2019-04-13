@@ -20,5 +20,10 @@ namespace MyLocomotives {
 #include "LocomotiveWithDrag.hpp"
 }
 
+namespace MyShapes {
+#include "Shape.hpp"
+#include "SquareShape.hpp"
+}
+
 #endif //PCH_H
 

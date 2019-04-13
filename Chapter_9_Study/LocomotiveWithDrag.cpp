@@ -43,7 +43,7 @@ LocomotiveWithDrag& LocomotiveWithDrag::setDragCoefficient(double dragCoefficien
 	}
 	return *this;
 }
-LocomotiveWithDrag& LocomotiveWithDrag::setMediumDensity(double) {
+LocomotiveWithDrag& LocomotiveWithDrag::setMediumDensity(double mediumDensity) {
 	if (mediumDensity >= 0) {
 		this->mediumDensity = mediumDensity;
 	}
@@ -56,21 +56,16 @@ LocomotiveWithDrag& LocomotiveWithDrag::setMediumDensity(double) {
 
 double LocomotiveWithDrag::getDragDeccel(void)
 {
-	return getDragCoefficient()*
-		getMediumDensity()*
-		getCurrentSpeed()*
-		getCurrentSpeed()*
-		getCrossSectionArea()*
-		(-0.5);
+	return -getCurrentSpeed()*getCrossSectionArea()*getMediumDensity()*0.5;
 }
 
 LocomotiveWithDrag& LocomotiveWithDrag::move(void) {
 	tick();
-	if (getCurrentSpeed() + getAcceleration() >= getMaxSpeed()) {
+	if (getCurrentSpeed() + (getAcceleration() + getDragDeccel()) >= getMaxSpeed()) {
 		setCurrentSpeed(getMaxSpeed());
 	}
 	else {
-		setCurrentSpeed(getCurrentSpeed() + getTick()*getAcceleration());
+		setCurrentSpeed(getCurrentSpeed() + getTick()*(getAcceleration() + getDragDeccel()));
 	}
 	setDistance(getDistance() + getCurrentSpeed());
 	return *this;

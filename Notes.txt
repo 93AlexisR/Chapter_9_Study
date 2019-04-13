@@ -58,6 +58,17 @@ When coding with polymorphic behavior; create a general class and create new cla
 to add features that use the base class's virtual functions or overload them when 
 necessary
 
+____________________
+
+12.6 Abstract Classes
+
+A class from which we will never instantiate an object but will use to inherit a useful framework
+
+They are declared as follows: 
+
+We add the operator "=0" avec the function declaration in the header to avirtual function
+
+ex: virtual myFunction(void) = 0;
 
 
 

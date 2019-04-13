@@ -17,7 +17,7 @@ int main() {
 	cout << baseClassPtr->getTotalPay() << endl; //base method
 	cout << myEmployee.getTotalPay() << endl; //new method
 	//the above is the bread & butter of polymorphism 
-*/
+
 
 	MyLocomotives::Locomotive myLoco(
 		1.0,
@@ -26,16 +26,12 @@ int main() {
 		5.0,
 		360.0
 	);
-	for (unsigned int i = 0; i < 100; i++) {
-		myLoco.move();
-		cout << myLoco.getCurrentSpeed() << endl;
-	}
-	myLoco.reset();
+	MyLocomotives::LocomotiveWithDrag myLocoWithDrag(5.0, 360.0, 1.0, 1.1455);
+	*/
 
 
+	MyShapes::Shape myShape;
 
-
-	return 0;			
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
