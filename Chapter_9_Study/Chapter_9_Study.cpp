@@ -29,8 +29,9 @@ int main() {
 	MyLocomotives::LocomotiveWithDrag myLocoWithDrag(5.0, 360.0, 1.0, 1.1455);
 	*/
 
+	MyShapes::SquareShape mySquare;
 
-	MyShapes::Shape myShape;
+
 
 }
 

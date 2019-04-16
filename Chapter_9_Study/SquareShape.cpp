@@ -3,15 +3,28 @@
 using namespace MyShapes;
 
 
-SquareShape::SquareShape()
+MyShapes::SquareShape::SquareShape(unsigned int sideSize, unsigned int lowerLeftPositionX, unsigned int lowerLeftPositionY)
 {
+	this->lowerLeftPositionX = lowerLeftPositionX;
+	this->lowerLeftPositionY = lowerLeftPositionY;
+	draw();
+}
+
+MyShapes::SquareShape::SquareShape()
+	: SquareShape(5, 0, 0)
+{
+	draw();
 }
 
 
-SquareShape::~SquareShape()
-{
-}
+//MyShapes::SquareShape::~SquareShape() {
+	//MyShapes::Shape::~Shape();
+//}
 
-SquareShape& draw(void) {
-
+SquareShape& MyShapes::SquareShape::draw(void) {
+	for (unsigned int i = 0; i < sideSize; i++) {
+		flipX(i + lowerLeftPositionX);
+		flipY(i + lowerLeftPositionY);
+	}
+	return *this;
 }
