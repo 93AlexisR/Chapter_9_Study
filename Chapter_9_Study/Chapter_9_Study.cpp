@@ -28,18 +28,19 @@ int main() {
 	);
 	MyLocomotives::LocomotiveWithDrag myLocoWithDrag(5.0, 360.0, 1.0, 1.1455);
 	*/
-
+		
 	MyShapes::SquareShape mySquare;
+	//mySquare.print();
 
 
-
+	//https://stackoverflow.com/questions/14959393/pointer-to-a-multidimensional-vector
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 
 // Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
+//   1. Use the Solution Explorer window to add/manage files 
 //   2. Use the Team Explorer window to connect to source control
 //   3. Use the Output window to see build output and other messages
 //   4. Use the Error List window to view errors

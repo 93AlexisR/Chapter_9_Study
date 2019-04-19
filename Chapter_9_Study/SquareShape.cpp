@@ -23,8 +23,7 @@ MyShapes::SquareShape::SquareShape()
 
 SquareShape& MyShapes::SquareShape::draw(void) {
 	for (unsigned int i = 0; i < sideSize; i++) {
-		flipX(i + lowerLeftPositionX);
-		flipY(i + lowerLeftPositionY);
+
 	}
 	return *this;
 }
