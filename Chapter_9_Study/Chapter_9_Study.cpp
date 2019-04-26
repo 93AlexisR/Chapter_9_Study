@@ -27,10 +27,31 @@ int main() {
 		360.0
 	);
 	MyLocomotives::LocomotiveWithDrag myLocoWithDrag(5.0, 360.0, 1.0, 1.1455);
+
+	vector<vector<bool>>* newBoolPtr;
+	newBoolPtr = new vector<vector<bool>>(50, vector<bool>(50));
+	for (unsigned int i = 0; i < 50; i++) {
+		for (unsigned int j = 0; j < 50; j++) {
+			newBoolPtr->at(i).at(j).flip();
+			if (newBoolPtr->at(i).at(j)) {
+				cout << "[" << i << "],[" << j << "]" << endl;
+			}
+		}
+	}
+	unsigned int i = 0;
+	for (auto v : *newBoolPtr) {
+		for (auto w : newBoolPtr->at(0)) {
+			if (w) {
+				cout << ++i << endl;
+			}
+		}
+	}
 	*/
-		
+
+
 	MyShapes::SquareShape mySquare;
-	//mySquare.print();
+	mySquare.draw();
+	mySquare.print();
 
 
 	//https://stackoverflow.com/questions/14959393/pointer-to-a-multidimensional-vector
