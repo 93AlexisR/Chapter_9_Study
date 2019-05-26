@@ -18,9 +18,9 @@ MyShapes::SquareShape::SquareShape(unsigned int newSideSize, unsigned int newSqu
 }
 
 MyShapes::SquareShape::SquareShape()
-	: SquareShape(5, 0, 0)
+	: SquareShape(5, 0, 0) //create square of side size 5 at 0,0
 {
-	MyShapes::SquareShape::draw();
+	//
 }
 
 
@@ -32,27 +32,17 @@ MyShapes::SquareShape::~SquareShape() {
 		);
 }
 
-SquareShape& MyShapes::SquareShape::draw(void) {
-	bool topComplete{ false };
+MyShapes::SquareShape& MyShapes::SquareShape::draw(void) {
+	for (unsigned int i = *squareOriginX; i < *squareOriginX + *sideSize; i++) {
+		flip(i, *squareOriginX).
+			flip(i, *squareOriginX + *sideSize - 1).
+			flip(*squareOriginY, i).
+			flip(*squareOriginY + *sideSize - 1, i);
 
-	for (unsigned int i = 0; i < *canvasSize; i++) {
-
-		if (i == *squareOriginY) {
-			for (unsigned int j = *squareOriginX; j < *sideSize; j++) {
-				flip(i, j);
-			}
-			topComplete = true;
-		}
-		else if (topComplete) {
-			flip(i, 0);
-			flip(i, *sideSize);
-		}
-		else if (i == (*squareOriginY + *sideSize)) {
-			for (unsigned int j = *squareOriginX; j < (*sideSize + *squareOriginX); j++) {
-				flip(i, j);
-			}
-			break;
-		}
 	}
+	flip(*squareOriginX, *squareOriginY).
+		flip(*squareOriginX + *sideSize - 1, *squareOriginY).
+		flip(*squareOriginX, *squareOriginY + *sideSize - 1).
+		flip(*squareOriginX + *sideSize - 1, *squareOriginY + *sideSize - 1);
 	return *this;
 }

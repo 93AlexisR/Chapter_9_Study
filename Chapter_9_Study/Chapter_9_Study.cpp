@@ -5,55 +5,9 @@
 
 
 int main() {
-	/*	myEmployees::CommissionEmployee myEmployee(
-		"John",
-		"Smith",
-		5.0,
-		40.0,
-		2500.0,
-		0.125
-	);
-	myEmployees::Employee* baseClassPtr{ &myEmployee };
-	cout << baseClassPtr->getTotalPay() << endl; //base method
-	cout << myEmployee.getTotalPay() << endl; //new method
-	//the above is the bread & butter of polymorphism 
-
-
-	MyLocomotives::Locomotive myLoco(
-		1.0,
-		1.0,
-		1.0,
-		5.0,
-		360.0
-	);
-	MyLocomotives::LocomotiveWithDrag myLocoWithDrag(5.0, 360.0, 1.0, 1.1455);
-
-	vector<vector<bool>>* newBoolPtr;
-	newBoolPtr = new vector<vector<bool>>(50, vector<bool>(50));
-	for (unsigned int i = 0; i < 50; i++) {
-		for (unsigned int j = 0; j < 50; j++) {
-			newBoolPtr->at(i).at(j).flip();
-			if (newBoolPtr->at(i).at(j)) {
-				cout << "[" << i << "],[" << j << "]" << endl;
-			}
-		}
-	}
-	unsigned int i = 0;
-	for (auto v : *newBoolPtr) {
-		for (auto w : newBoolPtr->at(0)) {
-			if (w) {
-				cout << ++i << endl;
-			}
-		}
-	}
-	*/
-
-
-	MyShapes::SquareShape mySquare;
-	mySquare.draw();
-	mySquare.print();
-
-
+	MyShapes::SquareShape* mySquare;
+	mySquare = new MyShapes::SquareShape(10,5,5);
+	mySquare->print();
 	//https://stackoverflow.com/questions/14959393/pointer-to-a-multidimensional-vector
 }
 
