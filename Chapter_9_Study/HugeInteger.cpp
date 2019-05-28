@@ -1,6 +1,5 @@
 #include "pch.h"
-#include "HugeInteger.h"
-using namespace myInteger;
+using namespace MyDataTypes;
 
 HugeInteger::HugeInteger(unsigned short int newArray[], bool signBit) {
 	this->signBit = signBit;
@@ -10,8 +9,8 @@ HugeInteger::HugeInteger(unsigned short int newArray[], bool signBit) {
 	sigBits = sigBitCount();
 }
 
-HugeInteger::HugeInteger(string& charVal) {
-	string tempString = charVal;
+HugeInteger::HugeInteger(std::string& charVal) {
+	std::string tempString = charVal;
 	stringSize = static_cast<unsigned int>(charVal.size());
 	unsigned int i = 0;
 
@@ -22,7 +21,7 @@ HugeInteger::HugeInteger(string& charVal) {
 	}
 
 	if (stringSize > arraySize) {
-		cout << "Class HugeInteger can only hold" << arraySize << " digits." << endl;
+		std::cout << "Class HugeInteger can only hold" << arraySize << " digits." << std::endl;
 		abort();
 	}
 
@@ -79,11 +78,11 @@ void HugeInteger::copy(HugeInteger otherInt) {
 }	
 
 void HugeInteger::print(void) {
-	cout << printString();
+	std::cout << printString();
 }
 
-string HugeInteger::printString(void) {
-	string tempString;
+std::string HugeInteger::printString(void) {
+	std::string tempString;
 	unsigned int i = 0;
 	unsigned short indexMod = 0;
 	if (!signBit) {
@@ -169,12 +168,12 @@ HugeInteger& HugeInteger::minusOne(void){ //will not work with edge cases, rebui
 		}
 	} 
 	else {
-		cout << "not yet coded lol" << endl;
+		std::cout << "not yet coded lol" << std::endl;
 		return *this;
 	}	
 	isEmpty();
 	if (isEmptyVar) {
-		cout << "oh noes, 0!" << endl;
+		std::cout << "oh noes, 0!" << std::endl;
 	}
 	return *this;
 }
@@ -246,7 +245,7 @@ HugeInteger HugeInteger::add(HugeInteger otherInt) {
 		}
 		else { //case +,+
 			if ((yugeInt[0] + otherInt.yugeInt[0]) > 9) {
-				std::cout << "HugeInteger overflow (more than 40 decimal places)" << endl; //don't comment me out
+				std::cout << "HugeInteger overflow (more than 40 decimal places)" << std::endl; //don't comment me out
 				abort();
 			}
 			for (int i = (arraySize - 1); i >= 0; i--) {
@@ -305,7 +304,7 @@ HugeInteger HugeInteger::subtract(HugeInteger otherInt) {
 	const unsigned int baseTenConstant{ 10 };
 	if (!signBit && otherInt.signBit) {
 		if (yugeInt[0] + otherInt.yugeInt[0] > 9) {
-			cout << "HugeInteger overflow (subtract)" << endl;
+			std::cout << "HugeInteger overflow (subtract)" << std::endl;
 			abort();
 		}
 	}
@@ -425,7 +424,7 @@ HugeInteger HugeInteger::modulo(HugeInteger otherInt) {
 		}
 		else { //case ++
 			do {
-				cout << "tempInt = " << tempInt.printString() << endl;
+				std::cout << "tempInt = " << tempInt.printString() << std::endl;
 				tempInt.copy(tempInt.subtract(otherInt));
 				//myIndex.plusOne(); //stores division value, useful later
 			} while (tempInt.isGreater(otherInt));

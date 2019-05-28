@@ -13,8 +13,15 @@
 #include "Account.h"
 #include "Time.h"
 #include <Windows.h>
-#include "HugeInteger.h"
+#include <fstream>
 
+
+
+namespace MyDataTypes {
+#include "HugeInteger.h"
+}
+
+/*
 namespace MyLocomotives {
 #include "Locomotive.h"
 #include "LocomotiveWithDrag.hpp"
@@ -24,6 +31,7 @@ namespace MyShapes {
 #include "Shape.hpp"
 #include "SquareShape.hpp"
 }
+*/
 
 #endif //PCH_H
 

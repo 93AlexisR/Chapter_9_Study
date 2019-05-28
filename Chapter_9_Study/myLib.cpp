@@ -53,9 +53,9 @@ const int charToInt(const char& convertMe) {
 	return convertMe - 48;
 }
 
-string vecToString(const vector<char> fakeString) {
+std::string vecToString(const std::vector<char> fakeString) {
 	const unsigned short int stringSize = static_cast<unsigned short int>(fakeString.size());
-	string tempString{ "." };
+	std::string tempString{ "." };
 	tempString.resize(fakeString.size());
 	for (unsigned int i = 0; i < stringSize; i++) {
 		tempString[i] = fakeString[i];
@@ -66,7 +66,7 @@ string vecToString(const vector<char> fakeString) {
 const char intToChar(const unsigned short int myChar) {
 	unsigned short int newChar = 48 + myChar;
 	if (newChar < 48 || newChar > 126) {
-		cout << "intToChar crash (out of bounds)" << endl;
+		std::cout << "intToChar crash (out of bounds)" << std::endl;
 		abort();
 	}
 	return static_cast<char>(newChar);

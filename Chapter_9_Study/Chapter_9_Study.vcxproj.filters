@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Account.h">
-      <Filter>Source Files\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HugeInteger.h">
       <Filter>Source Files\Header Files</Filter>
     </ClInclude>
@@ -27,33 +24,12 @@
     <ClInclude Include="pch.h">
       <Filter>Source Files\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
-      <Filter>Source Files\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RandEngine.h">
-      <Filter>Source Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Locomotive.h">
-      <Filter>Source Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Employee.h">
-      <Filter>Source Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LocomotiveWithDrag.hpp">
-      <Filter>Source Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shape.hpp">
-      <Filter>Source Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SquareShape.hpp">
       <Filter>Source Files\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="myLib.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Account.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Chapter_9_Study.cpp">
@@ -66,24 +42,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RandEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Time.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Locomotive.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Employee.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LocomotiveWithDrag.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shape.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SquareShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

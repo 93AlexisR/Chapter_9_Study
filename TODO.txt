@@ -20,3 +20,5 @@ In the latter case the member variable is initialized and destroyed with its own
 
 ** Update2: as @sbi pointed out, the resource - although often is allocated inside the 
 constructor - may also be allocated outside and passed in as a parameter.	
+
+	//https://stackoverflow.com/questions/14959393/pointer-to-a-multidimensional-vector
